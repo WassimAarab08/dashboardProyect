@@ -1,4 +1,5 @@
 {
+    "github.copilot.chat.localeOverride": "es",
     "angular-schematics.schematicsDefaultOptions": {
         "angular-*": {
             "externalTemplate": true,

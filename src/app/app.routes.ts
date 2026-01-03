@@ -7,35 +7,35 @@ export const routes: Routes = [
         children:[
             {
                 path:'data-binding',
-                 loadComponent: () => import('./features/dashboard/components/data-binding.component/data-binding.component'),
+                 loadComponent: () => import('./features/dashboard/pages/data-binding-page/data-binding-page'),
             },
              {
                 path:'directivas',
-                 loadComponent: () => import('./features/dashboard/components/data-binding.component/data-binding.component'),
+                 loadComponent: () => import('./features/dashboard/pages/data-binding-page/data-binding-page'),
             },
              {
                 path:'comunicacion',
-                 loadComponent: () => import('./features/dashboard/components/data-binding.component/data-binding.component'),
+                 loadComponent: () => import('./features/dashboard/pages/data-binding-page/data-binding-page'),
             },
                {
                 path:'formularios',
-                 loadComponent: () => import('./features/dashboard/components/data-binding.component/data-binding.component'),
+                 loadComponent: () => import('./features/dashboard/pages/data-binding-page/data-binding-page'),
             },
                {
                 path:'servicios',
-                 loadComponent: () => import('./features/dashboard/components/data-binding.component/data-binding.component'),
+                 loadComponent: () => import('./features/dashboard/pages/data-binding-page/data-binding-page'),
             },
                {
                 path:'modulos',
-                 loadComponent: () => import('./features/dashboard/components/data-binding.component/data-binding.component'),
+                 loadComponent: () => import('./features/dashboard/pages/data-binding-page/data-binding-page'),
             },
                {
                 path:'hostlistener-hostbinding',
-                 loadComponent: () => import('./features/dashboard/components/data-binding.component/data-binding.component'),
+                 loadComponent: () => import('./features/dashboard/pages/data-binding-page/data-binding-page'),
             },
              {
                 path:'peticiones-HTTP',
-                 loadComponent: () => import('./features/dashboard/components/data-binding.component/data-binding.component'),
+                 loadComponent: () => import('./features/dashboard/pages/data-binding-page/data-binding-page'),
             },
                 {
             path:'**',

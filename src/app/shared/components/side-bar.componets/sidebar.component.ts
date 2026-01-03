@@ -42,32 +42,34 @@ export class SidebarComponent {
   isMobileOpen = this.uiService.isMobileMenuOpen;
    preAppName = preAppName;
    postAppName =postAppName;
+  // ...existing code...
   menuItems: MenuItem[] = [
     { 
-      id: 'dashboard', 
-      label: 'NÚCLEO CENTRAL', 
+      id: 'data-binding', 
+      label: 'DATA BINDING', 
       icon: 'icon-dashboard',
-      route: '/dashboard'
+      route: '/dashboard/data-binding' 
     },
     { 
-      id: 'quantum', 
-      label: 'RED NEURAL', 
+      id: 'directivas', 
+      label: 'DIRECTIVAS', 
       icon: 'icon-network',
-      route: '/quantum'
+      route: '/dashboard/directivas' 
     },
     { 
-      id: 'cyber', 
-      label: 'SEGURIDAD', 
+      id: 'comunicacion', 
+      label: 'COMUNICACIÓN', 
       icon: 'icon-security',
-      route: '/cyber'
+      route: '/dashboard/comunicacion' 
     },
     { 
-      id: 'neural', 
-      label: 'BASE DATOS', 
+      id: 'formularios', 
+      label: 'FORMULARIOS', 
       icon: 'icon-database',
-      route: '/neural'
+      route: '/dashboard/formularios' 
     },
   ];
+
 
   toggleSidebar() {
     this.uiService.toggleSidebar();
