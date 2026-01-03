@@ -1,0 +1,15 @@
+<!-- Layout Principal del Dashboard -->
+<div class="flex h-screen bg-linear-to-br from-slate-100 via-slate-50 to-white dark:from-[#0a0a0f] dark:via-[#0d0d14] dark:to-[#0a0a0f] text-slate-700 dark:text-zinc-400 font-['Inter'] overflow-hidden">
+  <!-- Sidebar -->
+  <app-sidebar></app-sidebar>
+  
+  <!-- Contenedor Derecho -->
+  <div class="flex-1 flex flex-col min-w-0">
+  <!-- top-bar -->
+    <app-top-bar></app-top-bar>
+    <!-- Contenido Principal -->
+    <main class="flex-1 overflow-auto p-6">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>
