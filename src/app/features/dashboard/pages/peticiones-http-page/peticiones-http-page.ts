@@ -5,6 +5,6 @@ import { Component } from '@angular/core';
   imports: [],
   templateUrl: './peticiones-http-page.html',
 })
-export class PeticionesHttpPageComponent {
+export default class PeticionesHttpPageComponent {
 
 }

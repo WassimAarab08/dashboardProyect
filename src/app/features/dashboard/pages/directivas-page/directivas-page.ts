@@ -5,6 +5,6 @@ import { Component } from '@angular/core';
   imports: [],
   templateUrl: './directivas-page.html',
 })
-export class DirectivasPageComponent {
+export default class DirectivasPageComponent {
 
 }

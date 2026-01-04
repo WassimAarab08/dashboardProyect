@@ -5,6 +5,6 @@ import { Component } from '@angular/core';
   imports: [],
   templateUrl: './comunicacion-page.html',
 })
-export class ComunicacionPageComponent {
+export default class ComunicacionPageComponent {
 
 }

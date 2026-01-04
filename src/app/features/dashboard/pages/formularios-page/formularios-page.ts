@@ -5,6 +5,6 @@ import { Component } from '@angular/core';
   imports: [],
   templateUrl: './formularios-page.html',
 })
-export class FormulariosPageComponent {
+export default class FormulariosPageComponent {
 
 }

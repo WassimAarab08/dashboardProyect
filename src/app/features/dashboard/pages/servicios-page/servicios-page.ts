@@ -5,6 +5,6 @@ import { Component } from '@angular/core';
   imports: [],
   templateUrl: './servicios-page.html',
 })
-export class ServiciosPageComponent {
+export default class ServiciosPageComponent {
 
 }

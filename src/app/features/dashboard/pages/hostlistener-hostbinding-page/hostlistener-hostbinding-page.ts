@@ -5,6 +5,6 @@ import { Component } from '@angular/core';
   imports: [],
   templateUrl: './hostlistener-hostbinding-page.html',
 })
-export class HostlistenerHostbindingPageComponent {
+export default class HostlistenerHostbindingPageComponent {
 
 }

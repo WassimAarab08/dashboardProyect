@@ -5,6 +5,6 @@ import { Component } from '@angular/core';
   imports: [],
   templateUrl: './modulos-page.html',
 })
-export class ModulosPageComponent {
+export default class ModulosPageComponent {
 
 }
