@@ -6,7 +6,7 @@ export const routes: Routes = [
         loadComponent: () => import('./features/dashboard/pages/dashboard-page/dashboard-page'),
         children:[
             {
-                path:'data-binding',
+                path:'data-binding', 
                  loadComponent: () => import('./features/dashboard/pages/data-binding-page/data-binding-page'),
             },
              {
