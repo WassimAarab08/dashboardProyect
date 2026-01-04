@@ -37,10 +37,11 @@
     <path stroke-linecap="round" stroke-linejoin="round" d="M18.75 19.5l-7.5-7.5 7.5-7.5m-6 15L5.25 12l7.5-7.5" />
   </symbol>
 
-  <symbol id="icon-chevron-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-  </symbol>
-
+<symbol id="memory-alpha-w" viewBox="0 0 512 512" fill="currentColor">
+  <path d="M403.119,270.381h-71.712l77.852-148.448c0.766-1.462,1.167-3.087,1.167-4.738V10.199C410.426,4.567,405.86,0,400.227,0 h-88.922c-3.763,0-7.221,2.072-8.996,5.392l-50.042,93.65H111.05c-5.633,0-10.199,4.567-10.199,10.199v120.732 c0,5.632,4.566,10.199,10.199,10.199h65.804L99.885,384.215c-0.79,1.479-1.203,3.129-1.203,4.807v112.779 c0,5.632,4.566,10.199,10.199,10.199h89.645c3.793,0,7.272-2.103,9.033-5.462l49.835-95.027h145.725 c5.633,0,10.199-4.567,10.199-10.199V280.58C413.319,274.948,408.752,270.381,403.119,270.381z M392.919,391.113H251.226 c-3.792,0-7.271,2.103-9.032,5.462l-49.835,95.027h-73.277V391.574l83.783-156.794c1.689-3.161,1.595-6.976-0.248-10.05 c-1.843-3.073-5.164-4.955-8.748-4.955h-72.619V119.441H258.38c3.765,0,7.222-2.073,8.996-5.392l50.042-93.65h72.608v94.286 l-84.518,161.16c-1.657,3.161-1.542,6.96,0.305,10.015c1.847,3.055,5.158,4.921,8.727,4.921h78.378V391.113z"></path>
+  <path d="M329.434,357.992h-63.235c-5.633,0-10.199,4.567-10.199,10.199c0,5.632,4.566,10.199,10.199,10.199h63.235 c5.633,0,10.199-4.567,10.199-10.199C339.633,362.559,335.067,357.992,329.434,357.992z"></path>
+  <path d="M369.211,357.992h-6.12c-5.633,0-10.199,4.567-10.199,10.199c0,5.632,4.566,10.199,10.199,10.199h6.12 c5.633,0,10.199-4.567,10.199-10.199C379.41,362.559,374.844,357.992,369.211,357.992z"></path>
+</symbol>
 </svg>
 
 <!-- OVERLAY MÓVIL -->
@@ -55,7 +56,7 @@
 <aside 
   [class]="'fixed lg:static inset-y-0 left-0 z-50 flex flex-col h-screen transition-all duration-500 ease-out ' + 
            'bg-linear-to-b from-white via-slate-50/80 to-slate-100/50 dark:from-[#0f0f18] dark:via-[#0c0c14] dark:to-[#0a0a10] ' +
-           'border-r border-slate-200/80 dark:border-emerald-500/10 pt-2 pl-3 ' +
+           'border-r border-slate-200 dark:border-emerald-500/10 pt-2 pl-3 ' +
            'shadow-[4px_0_24px_-2px_rgba(0,0,0,0.05)] dark:shadow-[4px_0_40px_-2px_rgba(16,185,129,0.08)] ' +
            (isCollapsed() ? 'w-18' : 'w-72') + ' ' + 
            (isMobileOpen() ? 'translate-x-0' : '-translate-x-full lg:translate-x-0')"
@@ -66,9 +67,9 @@
               <div class="relative shrink-0 group">
                 <!-- Logo con efecto glow -->
                 <div class="absolute inset-0 bg-emerald-500/30 rounded-xl blur-xl group-hover:bg-emerald-400/40 transition-all duration-500"></div>
-                <div class="relative w-10 h-10 bg-linear-to-br from-emerald-400 via-emerald-500 to-teal-600 rounded-xl flex items-center justify-center shadow-lg shadow-emerald-500/25 group-hover:shadow-emerald-400/40 transition-all duration-300 group-hover:scale-105">
-                  <svg class="w-5 h-5 text-white drop-shadow-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <use href="#icon-star"/>
+                <div class="relative w-12 h-12 bg-linear-to-br from-emerald-400 via-emerald-500 to-teal-600 rounded-xl flex items-center justify-center shadow-lg shadow-emerald-500/25 group-hover:shadow-emerald-400/40 transition-all duration-300 group-hover:scale-105">
+                  <svg class="w-8 h-8 text-black drop-shadow-sm" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <use href="#memory-alpha-w"/>
                   </svg>
                 </div>
               </div>
