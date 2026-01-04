@@ -2,3 +2,12 @@
 
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
+
+/* Variables de layout - modificar aquí si cambian los tamaños */
+:root {
+  --topbar-height: 64px;
+  --content-padding: 24px; 
+  --content-padding-lg: 32px;
+  --layout-offset: calc(var(--topbar-height) + var(--content-padding) * 2);
+  --layout-offset-lg: calc(var(--topbar-height) + var(--content-padding-lg) * 2);
+}

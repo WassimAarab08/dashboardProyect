@@ -1,17 +1,23 @@
 <!-- MAIN CONTENT -->
 <main
-  class="flex-1 overflow-y-auto p-6 lg:p-8 bg-linear-to-br from-slate-50 via-slate-100/50 to-white dark:from-[#0a0a0f] dark:via-[#0c0c14] dark:to-[#0a0a0f] custom-scrollbar"
+  class="overflow-hidden p-[var(--content-padding)] lg:p-[var(--content-padding-lg)] bg-linear-to-br from-slate-50 via-slate-100/50 to-white dark:from-[#050508] dark:via-[#070709] dark:to-[#050508]"
 >
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 h-[calc(100vh-8rem)] md:h-[calc(100vh-10rem)]">
+  <div class="grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-6 h-[calc(100vh-var(--layout-offset))] lg:h-[calc(100vh-var(--layout-offset-lg))]">
+    
+    <!-- Card 1: Intuitive Dashboard -->
     <section
-      class="relative md:row-span-2 p-8 rounded-3xl bg-white dark:bg-linear-to-br dark:from-[#0f0f1a] dark:via-[#0d0d15] dark:to-[#0a0a10] border border-slate-200/80 dark:border-emerald-500/10 shadow-xl overflow-hidden group hover:border-emerald-500/30 transition-all duration-500 flex flex-col justify-end h-full"
+      class="relative md:row-span-2 p-8 rounded-3xl bg-white dark:bg-[#12121a] border border-slate-200 dark:border-emerald-500/30 shadow-xl shadow-slate-200/50 dark:shadow-emerald-500/5 overflow-hidden group hover:border-emerald-500/70 hover:shadow-emerald-500/20 hover:shadow-2xl transition-all duration-500 flex flex-col justify-end h-full hover:-translate-y-1"
     >
+      <!-- Glow effect -->
+      <div class="absolute -inset-[1px] rounded-3xl bg-gradient-to-r from-emerald-500 via-teal-400 to-emerald-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm"></div>
+      <div class="absolute inset-0 rounded-3xl bg-white dark:bg-[#12121a]"></div>
+      
       <div
-        class="absolute top-0 right-0 w-96 h-96 bg-linear-to-bl from-emerald-500/10 via-teal-500/5 to-transparent blur-3xl group-hover:from-emerald-500/15 transition-all duration-700"
+        class="absolute top-0 right-0 w-96 h-96 bg-linear-to-bl from-emerald-500/15 via-teal-500/10 to-transparent blur-3xl group-hover:from-emerald-500/25 transition-all duration-700"
       ></div>
 
       <div class="relative z-10">
-        <div class="mb-5 text-4xl">🏴</div>
+        <div class="mb-5 text-4xl group-hover:scale-110 transition-transform duration-300">🏴</div>
         <h2 class="text-3xl font-black text-slate-800 dark:text-white tracking-tight mb-3">
           INTUITIVE
           <span
@@ -19,18 +25,23 @@
             >DASHBOARD</span
           >
         </h2>
-        <p class="text-slate-500 dark:text-zinc-500 text-sm leading-relaxed">
+        <p class="text-slate-500 dark:text-zinc-400 text-sm leading-relaxed">
           Stay organized with a clean, user-friendly interface powered by
           <span class="text-emerald-500 font-semibold">Modern UI</span>.
         </p>
       </div>
     </section>
 
+    <!-- Card 2: Smart Automation -->
     <section
-      class="relative md:col-span-2 p-8 rounded-3xl bg-white dark:bg-linear-to-br dark:from-[#0f0f1a] dark:via-[#0d0d15] dark:to-[#0a0a10] border border-slate-200/80 dark:border-emerald-500/10 shadow-xl overflow-hidden group hover:border-emerald-500/30 transition-all duration-500 flex items-center justify-between h-full"
+      class="relative md:col-span-2 p-8 rounded-3xl bg-white dark:bg-[#12121a] border border-slate-200 dark:border-emerald-500/30 shadow-xl shadow-slate-200/50 dark:shadow-emerald-500/5 overflow-hidden group hover:border-emerald-500/70 hover:shadow-emerald-500/20 hover:shadow-2xl transition-all duration-500 flex items-center justify-between h-full hover:-translate-y-1"
     >
+      <!-- Glow effect -->
+      <div class="absolute -inset-[1px] rounded-3xl bg-gradient-to-r from-teal-400 via-emerald-500 to-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm"></div>
+      <div class="absolute inset-0 rounded-3xl bg-white dark:bg-[#12121a]"></div>
+      
       <div
-        class="absolute top-0 right-0 w-80 h-80 bg-linear-to-bl from-emerald-500/10 to-transparent blur-3xl group-hover:from-emerald-500/15 transition-all duration-700"
+        class="absolute top-0 right-0 w-80 h-80 bg-linear-to-bl from-emerald-500/15 to-transparent blur-3xl group-hover:from-emerald-500/25 transition-all duration-700"
       ></div>
 
       <div class="relative z-10">
@@ -43,41 +54,51 @@
             >Automation</span
           >
         </h2>
-        <p class="text-slate-500 dark:text-zinc-500 text-sm leading-relaxed max-w-md">
+        <p class="text-slate-500 dark:text-zinc-400 text-sm leading-relaxed max-w-md">
           Automate repetitive tasks and save hours every week with our
           <span class="text-emerald-500 font-semibold">AI Engine</span>.
         </p>
       </div>
       <div
-        class="relative z-10 text-6xl opacity-50 group-hover:opacity-100 transition-opacity duration-500"
+        class="relative z-10 text-6xl opacity-50 group-hover:opacity-100 group-hover:scale-125 group-hover:rotate-12 transition-all duration-500"
       >
         ⚡
       </div>
     </section>
 
+    <!-- Card 3: Advanced Integrations -->
     <section
-      class="relative p-8 rounded-3xl bg-white dark:bg-linear-to-br dark:from-[#0f0f1a] dark:via-[#0d0d15] dark:to-[#0a0a10] border border-slate-200/80 dark:border-emerald-500/10 shadow-xl overflow-hidden group hover:border-emerald-500/30 transition-all duration-500 h-full flex flex-col justify-center"
+      class="relative p-8 rounded-3xl bg-white dark:bg-[#12121a] border border-slate-200 dark:border-emerald-500/30 shadow-xl shadow-slate-200/50 dark:shadow-emerald-500/5 overflow-hidden group hover:border-emerald-500/70 hover:shadow-emerald-500/20 hover:shadow-2xl transition-all duration-500 h-full flex flex-col justify-center hover:-translate-y-1"
     >
+      <!-- Glow effect -->
+      <div class="absolute -inset-[1px] rounded-3xl bg-gradient-to-r from-cyan-400 via-emerald-500 to-teal-400 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm"></div>
+      <div class="absolute inset-0 rounded-3xl bg-white dark:bg-[#12121a]"></div>
+      
       <div class="relative z-10">
-        <div class="mb-4 text-3xl opacity-80">🔊</div>
+        <div class="mb-4 text-3xl opacity-80 group-hover:scale-110 transition-transform duration-300">🔊</div>
         <h2 class="text-xl font-black text-slate-800 dark:text-white tracking-tight mb-2 uppercase">
           Advanced <span class="text-emerald-500">Integrations</span>
         </h2>
-        <p class="text-slate-500 dark:text-zinc-500 text-xs leading-relaxed">
+        <p class="text-slate-500 dark:text-zinc-400 text-xs leading-relaxed">
           Connect with your favorite tools to create a seamless workflow.
         </p>
       </div>
     </section>
 
+    <!-- Card 4: Robust Security -->
     <section
-      class="relative p-8 rounded-3xl bg-white dark:bg-linear-to-br dark:from-[#0f0f1a] dark:via-[#0d0d15] dark:to-[#0a0a10] border border-slate-200/80 dark:border-emerald-500/10 shadow-xl overflow-hidden group hover:border-emerald-500/30 transition-all duration-500 h-full flex flex-col justify-center"
+      class="relative p-8 rounded-3xl bg-white dark:bg-[#12121a] border border-slate-200 dark:border-emerald-500/30 shadow-xl shadow-slate-200/50 dark:shadow-emerald-500/5 overflow-hidden group hover:border-emerald-500/70 hover:shadow-emerald-500/20 hover:shadow-2xl transition-all duration-500 h-full flex flex-col justify-center hover:-translate-y-1"
     >
+      <!-- Glow effect -->
+      <div class="absolute -inset-[1px] rounded-3xl bg-gradient-to-r from-emerald-400 via-green-500 to-emerald-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm"></div>
+      <div class="absolute inset-0 rounded-3xl bg-white dark:bg-[#12121a]"></div>
+      
       <div class="relative z-10">
-        <div class="mb-4 text-3xl opacity-80">🔒</div>
+        <div class="mb-4 text-3xl opacity-80 group-hover:scale-110 transition-transform duration-300">🔒</div>
         <h2 class="text-xl font-black text-slate-800 dark:text-white tracking-tight mb-2 uppercase">
           Robust <span class="text-emerald-500">Security</span>
         </h2>
-        <p class="text-slate-500 dark:text-zinc-500 text-xs leading-relaxed">
+        <p class="text-slate-500 dark:text-zinc-400 text-xs leading-relaxed">
           Your data is protected with top-tier security and encryption.
         </p>
       </div>
