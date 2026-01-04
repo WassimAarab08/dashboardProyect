@@ -1,51 +1,86 @@
-   <!-- MAIN CONTENT -->
-          <main class="flex-1 overflow-y-auto p-6 lg:p-8 bg-linear-to-br from-slate-50 via-slate-100/50 to-white dark:from-[#0a0a0f] dark:via-[#0c0c14] dark:to-[#0a0a0f] custom-scrollbar">
-            <div class="max-w-6xl mx-auto space-y-6">
-              
-              <!-- Hero Card -->
-              <section class="relative p-8 rounded-3xl bg-white dark:bg-linear-to-br dark:from-[#0f0f1a] dark:via-[#0d0d15] dark:to-[#0a0a10] border border-slate-200/80 dark:border-emerald-500/10 shadow-xl overflow-hidden group hover:border-emerald-500/30 transition-all duration-500">
-                <!-- Efectos de fondo -->
-                <div class="absolute top-0 right-0 w-96 h-96 bg-linear-to-bl from-emerald-500/10 via-teal-500/5 to-transparent blur-3xl group-hover:from-emerald-500/15 transition-all duration-700"></div>
-                <div class="absolute bottom-0 left-0 w-64 h-64 bg-linear-to-tr from-teal-500/10 to-transparent blur-3xl"></div>
-                
-                <div class="relative z-10">
-                  <div class="flex items-center gap-3 mb-5">
-                    <div class="flex items-center gap-2">
-                      <span class="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_12px_rgba(16,185,129,0.6)] animate-pulse"></span>
-                      <span class="px-2.5 py-1 text-[9px] font-bold uppercase tracking-widest text-emerald-500 bg-emerald-500/10 rounded-full">Sistema Activo</span>
-                    </div>
-                  </div>
-                  <h2 class="text-3xl font-black text-slate-800 dark:text-white tracking-tight mb-3">
-                    Panel de <span class="bg-linear-to-r from-emerald-500 via-teal-400 to-emerald-500 bg-clip-text text-transparent">Control</span>
-                  </h2>
-                  <p class="text-slate-500 dark:text-zinc-500 text-sm leading-relaxed max-w-2xl">
-                    Monitorización en tiempo real con tecnología Angular 21. Todos los componentes utilizan 
-                    <span class="text-emerald-500 font-semibold">Signals</span> para renderizado reactivo y 
-                    <span class="text-emerald-500 font-semibold">OnPush Change Detection</span> para máximo rendimiento.
-                  </p>
-                </div>
-              </section>
+<!-- MAIN CONTENT -->
+<main
+  class="flex-1 overflow-y-auto p-6 lg:p-8 bg-linear-to-br from-slate-50 via-slate-100/50 to-white dark:from-[#0a0a0f] dark:via-[#0c0c14] dark:to-[#0a0a0f] custom-scrollbar"
+>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 h-[calc(100vh-8rem)] md:h-[calc(100vh-10rem)]">
+    <section
+      class="relative md:row-span-2 p-8 rounded-3xl bg-white dark:bg-linear-to-br dark:from-[#0f0f1a] dark:via-[#0d0d15] dark:to-[#0a0a10] border border-slate-200/80 dark:border-emerald-500/10 shadow-xl overflow-hidden group hover:border-emerald-500/30 transition-all duration-500 flex flex-col justify-end h-full"
+    >
+      <div
+        class="absolute top-0 right-0 w-96 h-96 bg-linear-to-bl from-emerald-500/10 via-teal-500/5 to-transparent blur-3xl group-hover:from-emerald-500/15 transition-all duration-700"
+      ></div>
 
-              <!-- Status Cards -->
-              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                @for (i of [1,2,3,4]; track i) {
-                  <div class="group relative p-5 bg-white dark:bg-[#0f0f18] border border-slate-200/80 dark:border-emerald-500/10 rounded-2xl shadow-sm hover:shadow-xl hover:shadow-emerald-500/5 hover:border-emerald-500/30 dark:hover:border-emerald-500/30 transition-all duration-300 cursor-pointer overflow-hidden">
-                    <!-- Glow effect on hover -->
-                    <div class="absolute inset-0 bg-linear-to-br from-emerald-500/0 via-emerald-500/0 to-teal-500/0 group-hover:from-emerald-500/5 group-hover:via-transparent group-hover:to-teal-500/5 transition-all duration-500"></div>
-                    
-                    <div class="relative z-10">
-                      <div class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-emerald-500/10 flex items-center justify-center text-slate-400 dark:text-emerald-500/70 group-hover:text-emerald-500 group-hover:bg-emerald-500/10 dark:group-hover:bg-emerald-500/20 transition-all duration-300 mb-4 group-hover:scale-110 group-hover:rotate-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><circle cx="12" cy="12" r="3"/></svg>
-                      </div>
-                      <p class="text-[9px] font-bold uppercase tracking-widest text-slate-400 dark:text-zinc-600 mb-1.5">Módulo_{{i}}</p>
-                      <p class="text-lg font-bold text-slate-800 dark:text-white mb-1">Core_Node</p>
-                      <div class="flex items-center gap-2">
-                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                        <span class="text-[10px] font-medium text-emerald-500">Operativo</span>
-                      </div>
-                    </div>
-                  </div>
-                }
-              </div>
-            </div>
-          </main>
+      <div class="relative z-10">
+        <div class="mb-5 text-4xl">🏴</div>
+        <h2 class="text-3xl font-black text-slate-800 dark:text-white tracking-tight mb-3">
+          INTUITIVE
+          <span
+            class="bg-linear-to-r from-emerald-500 via-teal-400 to-emerald-500 bg-clip-text text-transparent"
+            >DASHBOARD</span
+          >
+        </h2>
+        <p class="text-slate-500 dark:text-zinc-500 text-sm leading-relaxed">
+          Stay organized with a clean, user-friendly interface powered by
+          <span class="text-emerald-500 font-semibold">Modern UI</span>.
+        </p>
+      </div>
+    </section>
+
+    <section
+      class="relative md:col-span-2 p-8 rounded-3xl bg-white dark:bg-linear-to-br dark:from-[#0f0f1a] dark:via-[#0d0d15] dark:to-[#0a0a10] border border-slate-200/80 dark:border-emerald-500/10 shadow-xl overflow-hidden group hover:border-emerald-500/30 transition-all duration-500 flex items-center justify-between h-full"
+    >
+      <div
+        class="absolute top-0 right-0 w-80 h-80 bg-linear-to-bl from-emerald-500/10 to-transparent blur-3xl group-hover:from-emerald-500/15 transition-all duration-700"
+      ></div>
+
+      <div class="relative z-10">
+        <h2
+          class="text-3xl font-black text-slate-800 dark:text-white tracking-tight mb-3 uppercase"
+        >
+          Smart
+          <span
+            class="bg-linear-to-r from-emerald-500 via-teal-400 to-emerald-500 bg-clip-text text-transparent"
+            >Automation</span
+          >
+        </h2>
+        <p class="text-slate-500 dark:text-zinc-500 text-sm leading-relaxed max-w-md">
+          Automate repetitive tasks and save hours every week with our
+          <span class="text-emerald-500 font-semibold">AI Engine</span>.
+        </p>
+      </div>
+      <div
+        class="relative z-10 text-6xl opacity-50 group-hover:opacity-100 transition-opacity duration-500"
+      >
+        ⚡
+      </div>
+    </section>
+
+    <section
+      class="relative p-8 rounded-3xl bg-white dark:bg-linear-to-br dark:from-[#0f0f1a] dark:via-[#0d0d15] dark:to-[#0a0a10] border border-slate-200/80 dark:border-emerald-500/10 shadow-xl overflow-hidden group hover:border-emerald-500/30 transition-all duration-500 h-full flex flex-col justify-center"
+    >
+      <div class="relative z-10">
+        <div class="mb-4 text-3xl opacity-80">🔊</div>
+        <h2 class="text-xl font-black text-slate-800 dark:text-white tracking-tight mb-2 uppercase">
+          Advanced <span class="text-emerald-500">Integrations</span>
+        </h2>
+        <p class="text-slate-500 dark:text-zinc-500 text-xs leading-relaxed">
+          Connect with your favorite tools to create a seamless workflow.
+        </p>
+      </div>
+    </section>
+
+    <section
+      class="relative p-8 rounded-3xl bg-white dark:bg-linear-to-br dark:from-[#0f0f1a] dark:via-[#0d0d15] dark:to-[#0a0a10] border border-slate-200/80 dark:border-emerald-500/10 shadow-xl overflow-hidden group hover:border-emerald-500/30 transition-all duration-500 h-full flex flex-col justify-center"
+    >
+      <div class="relative z-10">
+        <div class="mb-4 text-3xl opacity-80">🔒</div>
+        <h2 class="text-xl font-black text-slate-800 dark:text-white tracking-tight mb-2 uppercase">
+          Robust <span class="text-emerald-500">Security</span>
+        </h2>
+        <p class="text-slate-500 dark:text-zinc-500 text-xs leading-relaxed">
+          Your data is protected with top-tier security and encryption.
+        </p>
+      </div>
+    </section>
+  </div>
+</main>
