@@ -17,7 +17,7 @@ export default class DirectivasPageComponent {
   clients = signal([
     {
       id: 1,
-      name: 'Hans Burger',
+      name: 'Casimiro Moreda',
       role: 'Frontend Developer',
       amount: 640.8,
       status: 'Aprobado',
