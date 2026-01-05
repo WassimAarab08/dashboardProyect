@@ -1,15 +1,19 @@
 <!-- MAIN CONTENT -->
 <main
-  class="overflow-hidden p-[var(--content-padding)] lg:p-[var(--content-padding-lg)] bg-linear-to-br from-slate-50 via-slate-100/50 to-white dark:from-[#050508] dark:via-[#070709] dark:to-[#050508]"
+  class="overflow-hidden p-(--content-padding) lg:p-(--content-padding-lg) bg-linear-to-br from-slate-50 via-slate-100/50 to-white dark:from-[#050508] dark:via-[#070709] dark:to-[#050508]"
 >
-  <div class="grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-6 h-[calc(100vh-var(--layout-offset))] lg:h-[calc(100vh-var(--layout-offset-lg))]">
+  <header class="mb-6">
+    <h1 class=" text-white text-3xl font-bold  pl-3 ">Data Binding Prueba</h1>
+    <p  class=" text-gray-400 text-sm   pl-3">Ejercicios prácticos sobre la comunicación entre el código y la vista.</p>
+  </header>
+  <div class="grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-6 h-[calc(100vh-var(--layout-offset)-5rem)] lg:h-[calc(100vh-var(--layout-offset-lg)-5rem)]">
     
     <!-- Card 1: Intuitive Dashboard -->
     <section
       class="relative md:row-span-2 p-8 rounded-3xl bg-white dark:bg-[#12121a] border border-slate-200 dark:border-emerald-500/30 shadow-xl shadow-slate-200/50 dark:shadow-emerald-500/5 overflow-hidden group hover:border-emerald-500/70 hover:shadow-emerald-500/20 hover:shadow-2xl transition-all duration-500 flex flex-col justify-end h-full hover:-translate-y-1"
     >
-      <!-- Glow effect -->
-      <div class="absolute -inset-[1px] rounded-3xl bg-gradient-to-r from-emerald-500 via-teal-400 to-emerald-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm"></div>
+        <!-- Glow effect -->
+        <div class="absolute -inset-px rounded-3xl bg-linear-to-r from-emerald-500 via-teal-400 to-emerald-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm"></div>
       <div class="absolute inset-0 rounded-3xl bg-white dark:bg-[#12121a]"></div>
       
       <div
@@ -17,7 +21,7 @@
       ></div>
 
       <div class="relative z-10">
-        <div class="mb-5 text-4xl group-hover:scale-110 transition-transform duration-300">🏴</div>
+        <div class="mb-5 text-4xl transition-transform duration-300">🏴</div>
         <h2 class="text-3xl font-black text-slate-800 dark:text-white tracking-tight mb-3">
           INTUITIVE
           <span
@@ -36,8 +40,8 @@
     <section
       class="relative md:col-span-2 p-8 rounded-3xl bg-white dark:bg-[#12121a] border border-slate-200 dark:border-emerald-500/30 shadow-xl shadow-slate-200/50 dark:shadow-emerald-500/5 overflow-hidden group hover:border-emerald-500/70 hover:shadow-emerald-500/20 hover:shadow-2xl transition-all duration-500 flex items-center justify-between h-full hover:-translate-y-1"
     >
-      <!-- Glow effect -->
-      <div class="absolute -inset-[1px] rounded-3xl bg-gradient-to-r from-teal-400 via-emerald-500 to-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm"></div>
+        <!-- Glow effect -->
+        <div class="absolute -inset-px rounded-3xl bg-linear-to-r from-teal-400 via-emerald-500 to-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm"></div>
       <div class="absolute inset-0 rounded-3xl bg-white dark:bg-[#12121a]"></div>
       
       <div
@@ -70,8 +74,8 @@
     <section
       class="relative p-8 rounded-3xl bg-white dark:bg-[#12121a] border border-slate-200 dark:border-emerald-500/30 shadow-xl shadow-slate-200/50 dark:shadow-emerald-500/5 overflow-hidden group hover:border-emerald-500/70 hover:shadow-emerald-500/20 hover:shadow-2xl transition-all duration-500 h-full flex flex-col justify-center hover:-translate-y-1"
     >
-      <!-- Glow effect -->
-      <div class="absolute -inset-[1px] rounded-3xl bg-gradient-to-r from-cyan-400 via-emerald-500 to-teal-400 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm"></div>
+        <!-- Glow effect -->
+        <div class="absolute -inset-px rounded-3xl bg-linear-to-r from-cyan-400 via-emerald-500 to-teal-400 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm"></div>
       <div class="absolute inset-0 rounded-3xl bg-white dark:bg-[#12121a]"></div>
       
       <div class="relative z-10">
@@ -89,8 +93,8 @@
     <section
       class="relative p-8 rounded-3xl bg-white dark:bg-[#12121a] border border-slate-200 dark:border-emerald-500/30 shadow-xl shadow-slate-200/50 dark:shadow-emerald-500/5 overflow-hidden group hover:border-emerald-500/70 hover:shadow-emerald-500/20 hover:shadow-2xl transition-all duration-500 h-full flex flex-col justify-center hover:-translate-y-1"
     >
-      <!-- Glow effect -->
-      <div class="absolute -inset-[1px] rounded-3xl bg-gradient-to-r from-emerald-400 via-green-500 to-emerald-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm"></div>
+        <!-- Glow effect -->
+        <div class="absolute -inset-px rounded-3xl bg-linear-to-r from-emerald-400 via-green-500 to-emerald-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm"></div>
       <div class="absolute inset-0 rounded-3xl bg-white dark:bg-[#12121a]"></div>
       
       <div class="relative z-10">
