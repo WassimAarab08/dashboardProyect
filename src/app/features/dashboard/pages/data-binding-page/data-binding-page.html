@@ -1,26 +1,28 @@
 <!-- MAIN CONTENT -->
-<main
-  class="overflow-auto p-(--content-padding) lg:p-(--content-padding-lg) min-h-[calc(100vh-1rem)] relative"
-  style="background-color: #050508; background-image: repeating-linear-gradient(0deg, transparent, transparent 50px, rgba(16, 185, 129, 0.08) 50px, rgba(16, 185, 129, 0.08) 51px), repeating-linear-gradient(90deg, transparent, transparent 50px, rgba(16, 185, 129, 0.08) 50px, rgba(16, 185, 129, 0.08) 51px);"
->
-  <header class="mb-10 px-40">
-    <h1 class=" text-white text-3xl font-bold  pl-3 ">Data Binding Prueba</h1>
-    <p  class=" text-gray-400 text-sm   pl-3">Ejercicios prácticos sobre la comunicación entre el código y la vista.</p>
+
+  <header class="mb-10 lg:px-40">
+    <h1 class="text-white text-3xl font-bold pl-3">Data Binding Prueba</h1>
+    <p class="text-gray-400 text-sm pl-3 pt-3">
+      Ejercicios prácticos sobre la comunicación entre el código y la vista.
+    </p>
   </header>
-  <div class="grid grid-cols-1 md:grid-cols-2 md:grid-rows-2 gap-8 px-40">
-    
+  <div class="grid grid-cols-1 md:grid-cols-2 md:grid-rows-2 gap-8 lg:px-40">
     <!-- Card 1: Interpolación -->
     <section class="card-emerald">
       <div>
         <div class="card-header">
-          <span class="text-xs font-bold uppercase tracking-wider text-emerald-400">Interpolación</span>
+          <span class="text-xs font-bold uppercase tracking-wider text-emerald-400"
+            >Interpolación</span
+          >
           <div class="card-badge bg-emerald-500"></div>
         </div>
         <h2 class="card-title">Texto Dinámico</h2>
         <div class="card-content-box">
-          <p class="text-emerald-500 font-mono text-sm">¡Hola! Este texto viene del componente TS.</p>
+          <p class="text-emerald-500 font-mono text-sm">
+            {{ interpolacion }}
+          </p>
         </div>
-        <p class="card-description" ngNonBindable>Muestra el valor de una variable usando {{ }}.</p>
+        <p class="card-description" ngNonBindable>Muestra el valor de una variable usando {{}}.</p>
       </div>
     </section>
 
@@ -28,7 +30,9 @@
     <section class="card-sky">
       <div>
         <div class="card-header">
-          <span class="text-xs font-bold uppercase tracking-wider text-sky-500">Property Binding</span>
+          <span class="text-xs font-bold uppercase tracking-wider text-sky-500"
+            >Property Binding</span
+          >
           <div class="card-badge bg-sky-500"></div>
         </div>
         <h2 class="card-title">Enlace de Atributos</h2>
@@ -43,29 +47,59 @@
     <section class="card-purple">
       <div>
         <div class="card-header">
-          <span class="text-xs font-bold uppercase tracking-wider text-purple-400">Event Binding</span>
+          <span class="text-xs font-bold uppercase tracking-wider text-purple-400"
+            >Event Binding</span
+          >
           <div class="card-badge bg-purple-400"></div>
         </div>
         <h2 class="card-title">Captura de Eventos</h2>
-        <p class="w-full text-center text-3xl font-bold text-white">{{eventBinding()}}</p>
-        <button (click)="sumar()"></button>
+        <p class="w-full mb-3 text-center text-3xl font-bold text-white">{{ eventBinding() }}</p>
+        <div class="flex gap-5">
+          <button
+            (click)="sumar()"
+            class="flex-1 py-2 bg-purple-600 hover:bg-purple-500 text-white rounded-lg font-medium transition-all active:scale-95"
+          >
+            Sumar
+          </button>
+          <button
+            (click)="restar()"
+            class="flex-1 py-2 bg-purple-600 hover:bg-purple-500 text-white rounded-lg font-medium transition-all active:scale-95"
+          >
+            Restar
+          </button>
+        </div>
         <p class="card-description">Captura eventos del usuario (click, input, etc.).</p>
       </div>
     </section>
 
-    <!-- Card 4: Robust Security -->
-   <section class="card-orange">
+    <!-- Card 4: Two-way Binding -->
+    <section class="card-orange">
       <div>
         <div class="card-header">
-          <span class="text-xs font-bold uppercase tracking-wider text-orange-400">Event Binding</span>
+          <span class="text-xs font-bold uppercase tracking-wider text-orange-400"
+            >Two-way Binding</span
+          >
           <div class="card-badge bg-orange-400"></div>
         </div>
-        <h2 class="card-title">Eventos Interactivos</h2>
-        <div class="card-content-box items-center flex justify-center">
-          <img [src]="propertyBinding" alt="angular logo" class="size-20 object-contain" />
+        <h2 class="card-title">Doble Sentido</h2>
+
+        <div class="flex flex-col gap-3">
+          <input
+            [value]="twoWayBinding()"
+            type="text"
+            placeholder="Escribe..."
+            (input)="twoWayBinding.set(texto.value)"
+            class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2 text-white focus:outline-none focus:border-orange-500"
+            #texto
+          />
+          
+          <div class="bg-slate-800/50 p-2 rounded text-center">
+            <span class="text-orange-400 font-medium">{{ twoWayBinding() || 'Esperando...' }}</span>
+          </div>
         </div>
-        <p class="card-description">Captura eventos del usuario (click, input, etc.).</p>
+
+        <p class="card-description">Sincroniza Input y Variable al instante.</p>
       </div>
     </section>
   </div>
-</main>
+

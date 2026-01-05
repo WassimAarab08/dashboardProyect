@@ -48,6 +48,13 @@
            hover:border-emerald-500/70 hover:shadow-emerald-500/20 hover:shadow-2xl
            transition-all duration-500 flex flex-col justify-between h-full hover:-translate-y-1;
   }
+
+   .card-emerald-generica {
+    @apply p-8 rounded-2xl bg-white dark:bg-[#12121a] border border-slate-200 
+           dark:border-emerald-500/30 shadow-xl shadow-slate-200/50 dark:shadow-emerald-500/5
+           hover:border-emerald-500/70 hover:shadow-emerald-500/20 hover:shadow-2xl
+           transition-all duration-500 flex flex-col justify-between h-full hover:-translate-y-1;
+  }
   
   .card-sky {
     @apply p-8 rounded-3xl bg-white dark:bg-[#12121a] border border-slate-200 

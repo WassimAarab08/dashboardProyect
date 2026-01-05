@@ -1,16 +1,39 @@
 <!-- Layout Principal del Dashboard -->
-<div class="flex h-screen bg-linear-to-br from-slate-100 via-slate-50 to-white dark:from-[#0a0a0f] dark:via-[#0d0d14] dark:to-[#0a0a0f] text-slate-700 dark:text-zinc-400 font-['Inter'] overflow-hidden">
+<div
+  class="flex h-screen bg-linear-to-br from-slate-100 via-slate-50 to-white dark:from-[#0a0a0f] dark:via-[#0d0d14] dark:to-[#0a0a0f] text-slate-700 dark:text-zinc-400 font-['Inter'] overflow-hidden"
+>
   <!-- Sidebar -->
   <app-sidebar></app-sidebar>
-  
+
   <!-- Contenedor Derecho -->
   <div class="flex-1 min-w-0 flex flex-col">
     <!-- top-bar -->
     <app-top-bar></app-top-bar>
-    
+
     <!-- Contenido Principal con scroll -->
     <div class="flex-1 overflow-auto">
-      <router-outlet></router-outlet>
+      <main
+        class="overflow-auto p-(--content-padding) lg:p-(--content-padding-lg) min-h-[calc(100vh-1rem)] relative"
+        style="
+          background-color: #050508;
+          background-image: repeating-linear-gradient(
+              0deg,
+              transparent,
+              transparent 50px,
+              rgba(16, 185, 129, 0.08) 50px,
+              rgba(16, 185, 129, 0.08) 51px
+            ),
+            repeating-linear-gradient(
+              90deg,
+              transparent,
+              transparent 50px,
+              rgba(16, 185, 129, 0.08) 50px,
+              rgba(16, 185, 129, 0.08) 51px
+            );
+        "
+      >
+        <router-outlet></router-outlet>
+      </main>
     </div>
   </div>
 </div>
