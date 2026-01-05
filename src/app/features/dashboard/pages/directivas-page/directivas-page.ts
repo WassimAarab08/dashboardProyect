@@ -1,21 +1,18 @@
-import { Component, signal, LOCALE_ID } from '@angular/core';
-import { DatePipe, CurrencyPipe, NgClass, registerLocaleData } from '@angular/common';
-import localeEs from '@angular/common/locales/es';
-
-registerLocaleData(localeEs);
+import { Component, signal } from '@angular/core';
+import ClientCardComponent from '../../components/client-card/client-card.component';
 
 @Component({
   selector: 'app-directivas-page',
-  imports: [DatePipe, CurrencyPipe, NgClass],
+  imports: [ClientCardComponent],
   templateUrl: './directivas-page.html',
-  providers: [{ provide: LOCALE_ID, useValue: 'es-ES' }],
 })
 export default class DirectivasPageComponent {
   isVisibleText = signal(false);
-
+  colorSelected: string = '';
   toggleText(): void {
     this.isVisibleText.update((v) => !v);
   }
+
 
   clients = signal([
     {
