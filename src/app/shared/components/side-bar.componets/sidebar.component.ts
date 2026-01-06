@@ -11,10 +11,7 @@ import { postAppName, preAppName } from '../../../core/constants/constants-globa
   templateUrl: './sidebar.component.html',
    styles: [`
     :host { display: block; height: 100vh; }
-    .custom-scrollbar::-webkit-scrollbar { width: 4px; }
-    .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
-    .custom-scrollbar::-webkit-scrollbar-thumb { background: #18181b; border-radius: 20px; }
-    
+   
     .active-item::before {
       content: '';
       position: absolute;
