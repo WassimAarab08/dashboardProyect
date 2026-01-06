@@ -19,6 +19,45 @@ export default class DirectivasPageComponent implements AfterViewInit {
     this.view.set(text2);
   }
 
+  // Ejemplos de código
+  codeIfExample = `// Template structure
+@if (isVisibleText()) {
+  <div class="active"> ... </div>
+}
+
+// Logic layer
+isVisibleText = signal(${this.isVisibleText()});
+
+toggleText() {
+  this.isVisibleText.update(v => !v);
+}`;
+
+
+  codeForExample = `// Template structure
+@for (client of clients(); track client.id) {
+  <app-client-card
+    [client]="client" />
+}
+
+// Data layer
+clients = signal([
+  { id: 1, name: '...' },
+  // ...
+]);`;
+
+
+
+  codeSwitchExample = `// Template structure
+@switch (colorSelected) {
+  @case ('Azul') { ... }
+  @case ('Rojo') { ... }
+  @case ('Verde') { ... }
+  @default { ... }
+}
+
+// State
+colorSelected: string = '';`;
+
   clients = signal([
     {
       id: 1,
