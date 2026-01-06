@@ -1,14 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import "tailwindcss";
-@import "tailwindcss/theme" layer(theme);
-@import "tailwindcss/utilities" layer(utilities);
+@import 'tailwindcss';
+@import 'tailwindcss/theme' layer(theme);
+@import 'tailwindcss/utilities' layer(utilities);
 @custom-variant dark (&:where(.dark, .dark *));
+
+
+@import 'highlight.js/styles/base16/ir-black.css';
 
 /* Variables de layout - modificar aquí si cambian los tamaños */
 :root {
   --topbar-height: 64px;
-  --content-padding: 24px; 
+  --content-padding: 24px;
   --content-padding-lg: 32px;
   --layout-offset: calc(var(--topbar-height) + var(--content-padding) * 2);
   --layout-offset-lg: calc(var(--topbar-height) + var(--content-padding-lg) * 2);
@@ -49,51 +52,51 @@
            transition-all duration-500 flex flex-col justify-between h-full hover:-translate-y-1;
   }
 
-   .card-emerald-generica {
+  .card-emerald-generica {
     @apply p-8 rounded-2xl bg-white dark:bg-[#12121a] border border-slate-200 
            dark:border-emerald-500/30 shadow-xl shadow-slate-200/50 dark:shadow-emerald-500/5
            hover:border-emerald-500/70 hover:shadow-emerald-500/20 hover:shadow-2xl
            transition-all duration-500 flex flex-col justify-between h-full hover:-translate-y-1;
   }
-  
+
   .card-sky {
     @apply p-8 rounded-3xl bg-white dark:bg-[#12121a] border border-slate-200 
            dark:border-sky-500/30 shadow-xl shadow-slate-200/50 dark:shadow-sky-500/5
            hover:border-sky-500/70 hover:shadow-sky-500/20 hover:shadow-2xl
            transition-all duration-500 flex flex-col justify-between h-full hover:-translate-y-1;
   }
-  .card-orange{
+  .card-orange {
     @apply p-8 rounded-3xl bg-white dark:bg-[#12121a] border border-slate-200 
            dark:border-orange-400/30 shadow-xl shadow-slate-200/50 dark:shadow-orange-400/5
            hover:border-orange-400/70 hover:shadow-orange-400/20 hover:shadow-2xl
            transition-all duration-500 flex flex-col justify-between h-full hover:-translate-y-1;
   }
-  
-  
+
   .card-purple {
     @apply p-8 rounded-3xl bg-white dark:bg-[#12121a] border border-slate-200 
            dark:border-purple-400/30 shadow-xl shadow-slate-200/50 dark:shadow-purple-400/5
            hover:border-purple-400/70 hover:shadow-purple-400/20 hover:shadow-2xl
            transition-all duration-500 flex flex-col justify-between h-full hover:-translate-y-1;
   }
-  
+
   .card-header {
     @apply flex items-center justify-between mb-4;
   }
-  
+
   .card-badge {
     @apply h-2 w-2 rounded-full shadow-[0_0_8px_rgba(16,185,129,0.6)];
   }
-  
+
   .card-title {
     @apply text-lg font-semibold text-slate-800 dark:text-white mb-4;
   }
-  
+
   .card-content-box {
     @apply bg-slate-100 dark:bg-slate-950 rounded-lg p-4 border border-slate-200 dark:border-slate-800;
   }
-  
+
   .card-description {
     @apply mt-4 text-xs text-slate-500 italic;
   }
+
 }

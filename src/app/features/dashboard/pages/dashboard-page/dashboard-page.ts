@@ -8,5 +8,6 @@ import { TopBarComponets } from "../../../../shared/components/top-bar.componets
   selector: 'app-dashboard-page',
   imports: [RouterOutlet, SidebarComponent, TopBarComponets],
   templateUrl: './dashboard-page.html',
+  styleUrl:'./dashboard-page.css'
 })
 export default class DashboardPage { }

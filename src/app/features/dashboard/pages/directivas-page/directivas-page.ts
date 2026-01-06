@@ -1,4 +1,5 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, AfterViewInit, PLATFORM_ID, inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import ClientCardComponent from '../../components/client-card/client-card.component';
 
 @Component({
@@ -6,13 +7,17 @@ import ClientCardComponent from '../../components/client-card/client-card.compon
   imports: [ClientCardComponent],
   templateUrl: './directivas-page.html',
 })
-export default class DirectivasPageComponent {
+export default class DirectivasPageComponent implements AfterViewInit {
+  private platformId = inject(PLATFORM_ID);
   isVisibleText = signal(false);
   colorSelected: string = '';
   toggleText(): void {
     this.isVisibleText.update((v) => !v);
   }
-
+  view = signal('result');
+  setView(text2: string) {
+    this.view.set(text2);
+  }
 
   clients = signal([
     {
@@ -48,4 +53,15 @@ export default class DirectivasPageComponent {
       date: new Date('2021-02-12'),
     },
   ]);
+
+  ngAfterViewInit() {
+    if (isPlatformBrowser(this.platformId)) {
+      import('highlight.js').then((hljs) => {
+        // Aplicar highlight a todos los bloques de código
+        document.querySelectorAll('pre code').forEach((block) => {
+          hljs.default.highlightElement(block as HTMLElement);
+        });
+      });
+    }
+  }
 }
