@@ -12,9 +12,9 @@ export class TopBarComponets {
   private uiService = inject(UiService);
   
   isDarkMode = this.preferencesService.isDarkMode;
-
+  
   toggleTheme() {
-    this.isDarkMode.update(val => !val);
+    this.preferencesService.toggleTheme();
   }
 
   toggleMobileMenu() {

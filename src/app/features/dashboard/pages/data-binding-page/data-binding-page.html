@@ -1,105 +1,128 @@
 <!-- MAIN CONTENT -->
+<header class="mb-10 max-w-full mx-auto px-4 sm:px-6 lg:px-8">
+  <h1 class="dark:text-white text-3xl text-black font-bold">Data Binding</h1>
+  <p class="dark:text-gray-400 text-sm pt-3">
+    Ejercicios prácticos sobre la comunicación entre el código y la vista.
+  </p>
+</header>
 
-  <header class="mb-10 lg:px-40">
-    <h1 class="text-white text-3xl font-bold pl-3">Data Binding Prueba</h1>
-    <p class="text-gray-400 text-sm pl-3 pt-3">
-      Ejercicios prácticos sobre la comunicación entre el código y la vista.
-    </p>
-  </header>
-  <div class="grid grid-cols-1 md:grid-cols-2 md:grid-rows-2 gap-8 lg:px-40">
-    <!-- Card 1: Interpolación -->
-    <section class="card-emerald">
-      <div>
-        <div class="card-header">
-          <span class="text-xs font-bold uppercase tracking-wider text-emerald-400"
-            >Interpolación</span
-          >
-          <div class="card-badge bg-emerald-500"></div>
-        </div>
-        <h2 class="card-title">Texto Dinámico</h2>
-        <div class="card-content-box">
-          <p class="text-emerald-500 font-mono text-sm">
-            {{ interpolacion }}
-          </p>
-        </div>
-        <p class="card-description" ngNonBindable>Muestra el valor de una variable usando {{}}.</p>
+<div class="flex flex-col gap-16 w-full mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+  <!-- CARD Interpolation -->
+  <app-directive-card
+    [title]="'Text Interpolation'"
+    [directiveName]="'{{ }}'"
+    [description]="descriptionInterpolation"
+    [themeColor]="'purple'"
+    [codeExample]="codeInterpolation"
+    [fileName]="'interpolation.ts'"
+    [footerLabel]="'Binding Type'"
+    [footerValue]="'One-way: Component → View'"
+  >
+    <div class="card-content-box">
+      <p class="text-purple-400 font-mono text-sm leading-relaxed">
+        {{ interpolacion }}
+      </p>
+    </div>
+  </app-directive-card>
+
+  <!-- CARD Property Binding -->
+  <app-directive-card
+    [title]="'Property Binding'"
+    [directiveName]="'[property]'"
+    [description]="descriptionProperty"
+    [themeColor]="'sky'"
+    [codeExample]="codeProperty"
+    [fileName]="'property.html'"
+    [footerLabel]="'Binding Type'"
+    [footerValue]="'One-way: Component → View'"
+  >
+    <div class="space-y-6">
+      <!-- Image binding -->
+      <div class="flex justify-center">
+        <img
+          [src]="propertyBinding"
+          alt="angular logo"
+          class="size-32 object-contain drop-shadow-[0_0_20px_rgba(56,189,248,0.5)]"
+        />
       </div>
-    </section>
 
-    <!-- Card 2: Property Binding -->
-    <section class="card-sky">
-      <div>
-        <div class="card-header">
-          <span class="text-xs font-bold uppercase tracking-wider text-sky-500"
-            >Property Binding</span
-          >
-          <div class="card-badge bg-sky-500"></div>
-        </div>
-        <h2 class="card-title">Enlace de Atributos</h2>
-        <div class="card-content-box items-center flex justify-center">
-          <img [src]="propertyBinding" alt="angular logo" class="size-20 object-contain" />
-        </div>
-        <p class="card-description">Controla propiedades de HTML (como src o disabled).</p>
+      <!-- Button disabled binding -->
+      <div class="space-y-3">
+        <button
+          [disabled]="isDisabled"
+          class="w-full py-4 bg-sky-600 hover:bg-sky-500 disabled:bg-slate-700 disabled:text-slate-500 disabled:cursor-not-allowed text-white rounded-xl font-bold transition-all text-lg"
+        >
+          {{ isDisabled ? 'Botón Deshabilitado' : 'Botón Habilitado' }}
+        </button>
+
+        <button
+          (click)="toggleDisabled()"
+          class="w-full py-2 bg-slate-800 hover:bg-slate-700 text-slate-400 text-xs rounded-lg font-medium transition-all"
+        >
+          {{ isDisabled ? '↑ Habilitar' : '↑ Deshabilitar' }}
+        </button>
       </div>
-    </section>
+    </div>
+  </app-directive-card>
 
-    <!-- Card 3: Event Binding -->
-    <section class="card-purple">
-      <div>
-        <div class="card-header">
-          <span class="text-xs font-bold uppercase tracking-wider text-purple-400"
-            >Event Binding</span
-          >
-          <div class="card-badge bg-purple-400"></div>
-        </div>
-        <h2 class="card-title">Captura de Eventos</h2>
-        <p class="w-full mb-3 text-center text-3xl font-bold text-white">{{ eventBinding() }}</p>
-        <div class="flex gap-5">
-          <button
-            (click)="sumar()"
-            class="flex-1 py-2 bg-purple-600 hover:bg-purple-500 text-white rounded-lg font-medium transition-all active:scale-95"
-          >
-            Sumar
-          </button>
-          <button
-            (click)="restar()"
-            class="flex-1 py-2 bg-purple-600 hover:bg-purple-500 text-white rounded-lg font-medium transition-all active:scale-95"
-          >
-            Restar
-          </button>
-        </div>
-        <p class="card-description">Captura eventos del usuario (click, input, etc.).</p>
+  <!-- CARD Event Binding -->
+  <app-directive-card
+    [title]="'Event Binding'"
+    [directiveName]="'(event)'"
+    [description]="descriptionEvent"
+    [themeColor]="'orange'"
+    [codeExample]="codeEvent"
+    [fileName]="'events.ts'"
+    [footerLabel]="'Current Value'"
+    [footerValue]="eventBinding().toString()"
+  >
+    <div class="space-y-4">
+      <p class="w-full text-center text-5xl font-bold text-white">{{ eventBinding() }}</p>
+      <div class="flex gap-4">
+        <button
+          (click)="sumar()"
+          class="flex-1 py-3 bg-orange-600 hover:bg-orange-500 text-white rounded-xl font-bold transition-all active:scale-95 shadow-lg shadow-orange-500/20"
+        >
+          Sumar
+        </button>
+        <button
+          (click)="restar()"
+          class="flex-1 py-3 bg-orange-600 hover:bg-orange-500 text-white rounded-xl font-bold transition-all active:scale-95 shadow-lg shadow-orange-500/20"
+        >
+          Restar
+        </button>
       </div>
-    </section>
+    </div>
+  </app-directive-card>
 
-    <!-- Card 4: Two-way Binding -->
-    <section class="card-orange">
-      <div>
-        <div class="card-header">
-          <span class="text-xs font-bold uppercase tracking-wider text-orange-400"
-            >Two-way Binding</span
-          >
-          <div class="card-badge bg-orange-400"></div>
-        </div>
-        <h2 class="card-title">Doble Sentido</h2>
+  <!-- CARD Two-way Binding -->
+  <app-directive-card
+    [title]="'Two-way Binding'"
+    [directiveName]="'[( )]'"
+    [description]="descriptionTwoWay"
+    [themeColor]="'emerald'"
+    [codeExample]="codeTwoWay"
+    [fileName]="'two-way.html'"
+    [footerLabel]="'Binding Type'"
+    [footerValue]="'Two-way: Component ⇄ View'"
+  >
+    <div class="flex flex-col gap-4">
+      <input
+        [value]="twoWayBinding()"
+        type="text"
+        placeholder="Escribe algo aquí..."
+        (input)="twoWayBinding.set(texto.value)"
+        class="w-full bg-slate-950 border-2 border-emerald-500/30 rounded-xl p-4 text-white placeholder:text-slate-600 focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all"
+        #texto
+      />
 
-        <div class="flex flex-col gap-3">
-          <input
-            [value]="twoWayBinding()"
-            type="text"
-            placeholder="Escribe..."
-            (input)="twoWayBinding.set(texto.value)"
-            class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2 text-white focus:outline-none focus:border-orange-500"
-            #texto
-          />
-          
-          <div class="bg-slate-800/50 p-2 rounded text-center">
-            <span class="text-orange-400 font-medium">{{ twoWayBinding() || 'Esperando...' }}</span>
-          </div>
-        </div>
-
-        <p class="card-description">Sincroniza Input y Variable al instante.</p>
+      <div
+        class="bg-gradient-to-r from-emerald-500/10 to-green-500/10 border border-emerald-500/20 p-6 rounded-xl text-center min-h-[80px] flex items-center justify-center"
+      >
+        <span class="text-emerald-400 font-mono text-lg">{{
+          twoWayBinding() || 'Esperando entrada...'
+        }}</span>
       </div>
-    </section>
-  </div>
-
+    </div>
+  </app-directive-card>
+</div>

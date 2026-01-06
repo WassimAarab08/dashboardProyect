@@ -28,31 +28,38 @@ export default class DirectivasPageComponent {
     'La directiva <span class="text-orange-400 font-mono">@switch</span> evalúa una expresión y renderiza únicamente el bloque que coincide con uno de sus <span class="text-orange-400 font-mono">@case</span>, o el bloque <span class="text-orange-400 font-mono">@default</span> si no hay coincidencias.';
 
   // Ejemplos de código
-  codeIfExample = `// Template structure
+  codeIfExample = `// Lado de HTML
 @if (isVisibleText()) {
   <div class="active"> ... </div>
 }
 
-// Logic layer
+// Lado de TS
 isVisibleText = signal(${this.isVisibleText()});
 
 toggleText() {
   this.isVisibleText.update(v => !v);
 }`;
 
-  codeForExample = `// Template structure
+  codeForExample = `// Lado de HTML
 @for (client of clients(); track client.id) {
   <app-client-card
     [client]="client" />
 }
 
-// Data layer
+// Lado de TS
 clients = signal([
-  { id: 1, name: '...' },
+  {
+      id: 1,
+      name: 'Casimiro Moreda',
+      role: 'Frontend Developer',
+      amount: 640.8,
+      status: 'Aprobado',
+      date: new Date('2020-01-11'),
+    },
   // ...
 ]);`;
 
-  codeSwitchExample = `// Template structure
+  codeSwitchExample = `// Lado de HTML
 @switch (colorSelected) {
   @case ('Azul') { ... }
   @case ('Rojo') { ... }
@@ -60,7 +67,7 @@ clients = signal([
   @default { ... }
 }
 
-// State
+// Lado de TS
 colorSelected: string = '';`;
 
   clients = signal([

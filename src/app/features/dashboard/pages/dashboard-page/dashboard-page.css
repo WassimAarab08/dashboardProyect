@@ -1,3 +1,23 @@
+/* Tema Claro */
+.fondo {
+  background-color: #f8fafcf1;
+  background-image: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 50px,
+      rgba(0, 0, 0, 0.11) 50px,
+      rgba(0, 0, 0, 0.11) 51px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 50px,
+      rgba(0, 0, 0, 0.11) 50px,
+      rgba(0, 0, 0, 0.11) 51px
+    );
+}
+
+/* Tema Oscuro */
 :host-context(.dark) .fondo {
   background-color: #050508;
   background-image: repeating-linear-gradient(

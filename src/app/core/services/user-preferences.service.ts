@@ -41,9 +41,9 @@ export class UserPreferencesService {
   /**
    * Cambia entre dark y light
    */
-  // toggleTheme(): void {
-  //   this.isDarkMode.update(val => !val);
-  // }
+  toggleTheme(): void {
+    this.isDarkMode.update(val => !val);
+  }
 
   private applyTheme(isDark: boolean): void {
     if (isDark) {

@@ -41,7 +41,7 @@ export class SidebarComponent {
   isCollapsed = this.uiService.isSidebarCollapsed;
   isMobileOpen = this.uiService.isMobileMenuOpen;
    preAppName = preAppName;
-   postAppName =postAppName;
+   postAppName = postAppName;
 
   menuItems: MenuItem[] = [
     { 
