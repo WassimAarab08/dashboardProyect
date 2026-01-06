@@ -1,0 +1,102 @@
+<div class="relative w-full group">
+  <div
+    class="absolute -inset-1 bg-gradient-to-r {{ getThemeClasses().gradient }} rounded-2xl blur-sm opacity-50 group-hover:opacity-100 transition duration-1000"
+  ></div>
+
+  <div
+    class="relative bg-[#0d0d0d] rounded-2xl shadow-2xl overflow-hidden border border-white/5 flex flex-col"
+  >
+    <!-- Header macOS -->
+    <div
+      class="flex items-center justify-between px-6 py-4 bg-white/[0.03] border-b border-white/5"
+    >
+      <div class="flex items-center gap-4">
+        <div class="flex gap-2">
+          <div class="w-3 h-3 rounded-full bg-[#ff5f56] border border-[#e0443e]"></div>
+          <div class="w-3 h-3 rounded-full bg-[#ffbd2e] border border-[#dea123]"></div>
+          <div class="w-3 h-3 rounded-full bg-[#27c93f] border border-[#1aab29]"></div>
+        </div>
+        <div class="h-4 w-[1px] bg-white/10 mx-1"></div>
+        <span
+          class="text-[10px] font-bold tracking-[0.2em] text-slate-500 uppercase flex items-center gap-2"
+        >
+          <svg class="w-3 h-3 {{ getThemeClasses().icon }}" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2L2 19h20L12 2zm0 3L19.5 17h-15L12 5z" />
+          </svg>
+          Angular // {{ title() }}
+        </span>
+      </div>
+      <div
+        class="hidden md:flex items-center gap-2 px-3 py-1 bg-white/5 rounded-full border border-white/5"
+      >
+        <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+        <span class="text-[9px] font-bold text-slate-400 uppercase tracking-tighter">Live</span>
+      </div>
+    </div>
+
+    <!-- Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 bg-[#080808]">
+      <!-- Preview -->
+      <div
+        class="p-8 md:p-12 border-b lg:border-b-0 lg:border-r border-white/5 bg-gradient-to-br {{ getThemeClasses().bgGradient }} to-transparent"
+      >
+        <div class="space-y-6">
+          <div>
+            <h2 class="text-3xl font-bold text-white tracking-tight flex items-center gap-3">
+              <span class="{{ getThemeClasses().text }} font-mono text-3xl">{{ directiveName() }}</span>
+              {{ title() }}
+            </h2>
+            <p class="mt-4 text-slate-400 leading-relaxed text-sm" [innerHTML]="description()"></p>
+          </div>
+
+          <div class="pt-4 space-y-6">
+            <ng-content></ng-content>
+          </div>
+        </div>
+      </div>
+
+      <!-- Code -->
+      <div class="flex flex-col bg-black/40">
+        <div class="px-6 py-3 border-b border-white/5 flex items-center justify-between">
+          <span class="text-[10px] font-bold text-slate-600 uppercase tracking-widest">{{ fileName() }}</span>
+          <span class="text-[9px] text-slate-500 px-2 py-0.5 rounded bg-white/5 font-mono">UTF-8</span>
+        </div>
+
+        <div class="flex-1 p-6 md:p-8 overflow-x-auto bg-black">
+          <pre class="!bg-black !p-0 !m-0"><code class="language-typescript hljs text-[13px] leading-relaxed">{{ codeExample() }}</code></pre>
+        </div>
+
+        <div class="mt-auto border-t border-white/5 p-5 bg-white/[0.02]">
+          <div class="flex items-center justify-between">
+            <div class="flex flex-col">
+              <span class="text-[8px] text-slate-600 uppercase font-bold tracking-widest">{{ footerLabel() }}</span>
+              <span class="text-xs font-mono {{ getThemeClasses().text }}">{{ footerValue() }}</span>
+            </div>
+            <div class="flex gap-1">
+              <div class="w-1 h-4 bg-white/10 rounded-full"></div>
+              <div class="w-1 h-4 {{ getThemeClasses().dot }} rounded-full"></div>
+              <div class="w-1 h-4 bg-white/10 rounded-full"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div
+      class="px-6 py-3 bg-white/[0.03] border-t border-white/5 flex items-center justify-between"
+    >
+      <div class="flex items-center gap-6">
+        <span class="text-[9px] text-slate-500 flex items-center gap-2">
+          <span class="w-1.5 h-1.5 bg-green-500/80 rounded-full shadow-[0_0_4px_rgba(34,197,94,0.4)]"></span>
+          TS LINT: PASSED
+        </span>
+        <span class="text-[9px] text-slate-500 flex items-center gap-2">
+          <span class="w-1.5 h-1.5 {{ getThemeClasses().dotShadow }} rounded-full"></span>
+          {{ title() }}: Active
+        </span>
+      </div>
+      <span class="text-[9px] text-slate-500 font-mono tracking-tighter opacity-80">Angular v21</span>
+    </div>
+  </div>
+</div>

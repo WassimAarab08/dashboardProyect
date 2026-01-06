@@ -1,14 +1,14 @@
 import { Component, signal, AfterViewInit, PLATFORM_ID, inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import ClientCardComponent from '../../components/client-card/client-card.component';
+import DirectiveCardComponent from '../../components/directive-card/directive-card.component';
 
 @Component({
   selector: 'app-directivas-page',
-  imports: [ClientCardComponent],
+  imports: [ClientCardComponent, DirectiveCardComponent],
   templateUrl: './directivas-page.html',
 })
-export default class DirectivasPageComponent implements AfterViewInit {
-  private platformId = inject(PLATFORM_ID);
+export default class DirectivasPageComponent {
   isVisibleText = signal(false);
   colorSelected: string = '';
   toggleText(): void {
@@ -18,6 +18,14 @@ export default class DirectivasPageComponent implements AfterViewInit {
   setView(text2: string) {
     this.view.set(text2);
   }
+
+  // Descripciones
+  descriptionIf =
+    'La directiva <span class="text-purple-400 font-mono">@if</span> permite el renderizado condicional de elementos. El bloque de contenido solo se añade al DOM cuando la condición evaluada es verdadera, optimizando así el rendimiento.';
+  descriptionFor =
+    'La directiva <span class="text-sky-400 font-mono">@for</span> permite iterar sobre colecciones y renderizar un bloque por cada elemento. En cada iteración expones la variable del elemento (y opcionalmente el índice y flags como <span class="text-sky-400 font-mono">first/last</span>), lo que facilita crear listas dinámicas.';
+  descriptionSwitch =
+    'La directiva <span class="text-orange-400 font-mono">@switch</span> evalúa una expresión y renderiza únicamente el bloque que coincide con uno de sus <span class="text-orange-400 font-mono">@case</span>, o el bloque <span class="text-orange-400 font-mono">@default</span> si no hay coincidencias.';
 
   // Ejemplos de código
   codeIfExample = `// Template structure
@@ -32,7 +40,6 @@ toggleText() {
   this.isVisibleText.update(v => !v);
 }`;
 
-
   codeForExample = `// Template structure
 @for (client of clients(); track client.id) {
   <app-client-card
@@ -44,8 +51,6 @@ clients = signal([
   { id: 1, name: '...' },
   // ...
 ]);`;
-
-
 
   codeSwitchExample = `// Template structure
 @switch (colorSelected) {
@@ -92,15 +97,4 @@ colorSelected: string = '';`;
       date: new Date('2021-02-12'),
     },
   ]);
-
-  ngAfterViewInit() {
-    if (isPlatformBrowser(this.platformId)) {
-      import('highlight.js').then((hljs) => {
-        // Aplicar highlight a todos los bloques de código
-        document.querySelectorAll('pre code').forEach((block) => {
-          hljs.default.highlightElement(block as HTMLElement);
-        });
-      });
-    }
-  }
 }
