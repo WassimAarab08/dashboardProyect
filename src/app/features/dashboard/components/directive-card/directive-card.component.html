@@ -35,10 +35,10 @@
     </div>
 
     <!-- Grid -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 bg-white dark:bg-[#080808]">
+    <div class="grid grid-cols-1 lg:grid-cols-2 bg-white dark:bg-[#020202]">
       <!-- Preview -->
       <div
-        class="p-8 md:p-12 border-b lg:border-b-0 lg:border-r border-slate-200 dark:border-white/5 bg-gradient-to-br {{ getThemeClasses().bgGradient }} to-transparent"
+        class="p-8 md:p-12 border-b lg:border-b-0 lg:border-r border-slate-300 dark:border-white/10 bg-gradient-to-br {{ getThemeClasses().bgGradient }} to-transparent"
       >
         <div class="space-y-6">
           <div>
@@ -57,7 +57,7 @@
 
       <!-- Code -->
       <div class="flex flex-col bg-slate-100 dark:bg-black/40">
-        <div class="px-6 py-3 border-b border-slate-200 dark:border-white/5 flex items-center justify-between">
+        <div class="px-6 py-3 border-b border-slate-200 dark:border-white/10 flex items-center justify-between">
           <span class="text-[10px] font-bold text-slate-500 dark:text-slate-600 uppercase tracking-widest">{{ fileName() }}</span>
           <span class="text-[9px] text-slate-600 dark:text-slate-500 px-2 py-0.5 rounded bg-slate-200 dark:bg-white/5 font-mono">UTF-8</span>
         </div>
@@ -66,7 +66,7 @@
           <pre class="!bg-slate-50 dark:!bg-black !p-0 !m-0"><code class="language-typescript hljs text-[13px] leading-relaxed">{{ codeExample() }}</code></pre>
         </div>
 
-        <div class="mt-auto border-t border-slate-200 dark:border-white/5 p-5 bg-slate-100 dark:bg-white/[0.02]">
+        <div class="mt-auto border-t border-slate-200 dark:border-white/10 p-5 bg-slate-100 dark:bg-[#020202]">
           <div class="flex items-center justify-between">
             <div class="flex flex-col">
               <span class="text-[8px] text-slate-500 dark:text-slate-600 uppercase font-bold tracking-widest">{{ footerLabel() }}</span>
