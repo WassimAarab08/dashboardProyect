@@ -1,12 +1,22 @@
-import { Component, signal } from '@angular/core';
-import DirectiveCardComponent from '../../components/directive-card/directive-card.component';
+import { Component, inject, signal, OnInit } from '@angular/core';
+import DirectiveCardComponent from '../../components/explanations-card/explanations-card.component';
+import { PageHeaderService } from '../../services/page-header.service';
 
 @Component({
   selector: 'app-data-binding',
   imports: [DirectiveCardComponent],
   templateUrl: './data-binding-page.html',
 })
-export default class DataBindingComponent {
+export default class DataBindingComponent implements OnInit {
+  private readonly titleService = inject(PageHeaderService);
+
+  ngOnInit(): void {
+    this.titleService.setPageInfo(
+      'Data Binding',
+      'Explicación de métodos para comunicar el código con la vista.'
+    );
+  }
+
   interpolacion: string =
     'Interpolación: técnica de Angular que inserta en la plantilla el valor de una variable o expresión del componente usando {{ }}. Permite mostrar datos del TS en la vista de forma simple y reactiva.';
   propertyBinding: string = '/assets/icons/angular.svg';

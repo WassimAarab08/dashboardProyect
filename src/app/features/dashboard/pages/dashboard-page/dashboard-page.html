@@ -15,6 +15,12 @@
       <main
         class="overflow-auto p-(--content-padding) lg:p-(--content-padding-lg) min-h-[calc(100vh-1rem)] relative fondo"
       >
+        <header class="mb-10 max-w-full mx-auto px-4 sm:px-6 lg:px-8">
+          <h1 class="dark:text-white text-3xl text-black font-bold">{{title()}}</h1>
+          <p class="dark:text-gray-400 text-sm pt-3">
+            {{descriptiom()}}
+          </p>
+        </header>
         <router-outlet></router-outlet>
       </main>
     </div>

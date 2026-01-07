@@ -1,6 +1,6 @@
- export default interface MenuItem {
-      id: string, 
-      label: string, 
-      icon: string,
-      route: string
+export default interface MenuItem {
+  readonly id: string;
+  readonly label: string;
+  readonly icon: string;
+  readonly route: string;
 }

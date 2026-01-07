@@ -1,11 +1,3 @@
-<!-- MAIN CONTENT -->
-<header class="mb-10 max-w-full mx-auto px-4 sm:px-6 lg:px-8">
-  <h1 class="dark:text-white text-3xl text-black font-bold">Directivas: if, for y switch</h1>
-  <p class="dark:text-gray-400 text-gray-950 text-sm pt-3">
-    Ejercicios prácticos sobre la comunicación entre el código y la vista.
-  </p>
-</header>
-
 <div class="flex flex-col gap-16 w-full mx-auto px-4 sm:px-6 lg:px-8 pb-16">
   <!-- CARD @if -->
   <app-directive-card
@@ -122,16 +114,14 @@
     </div>
 
     <div
-      class="p-8 dark:bg-white/2  bg-black/5 border border-black/200  dark:border-white/5 rounded-2xl text-center min-h-30 flex items-center justify-center"
+      class="p-8 dark:bg-white/2 bg-black/5 border border-black/200 dark:border-white/5 rounded-2xl text-center min-h-30 flex items-center justify-center"
     >
       @switch (colorSelected) { @case ('Azul') {
       <p class="text-blue-400 font-black text-3xl animate-pulse tracking-tighter">AZUL_MODE</p>
       } @case ('Rojo') {
       <p class="text-red-400 font-black text-3xl animate-pulse tracking-tighter">ROJO_MODE</p>
       } @case ('Verde') {
-      <p class="text-emerald-400 font-black text-3xl animate-pulse tracking-tighter">
-        VERDE_MODE
-      </p>
+      <p class="text-emerald-400 font-black text-3xl animate-pulse tracking-tighter">VERDE_MODE</p>
       } @default {
       <p class="text-slate-600 font-mono text-xs uppercase tracking-widest">
         Selecciona un color...

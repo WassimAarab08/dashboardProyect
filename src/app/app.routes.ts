@@ -34,7 +34,7 @@ export const routes: Routes = [
                  loadComponent: () => import('./features/dashboard/pages/hostlistener-hostbinding-page/hostlistener-hostbinding-page'),
             },
              {
-                path:'peticiones-HTTP',
+                path:'peticiones-http',
                  loadComponent: () => import('./features/dashboard/pages/peticiones-http-page/peticiones-http-page'),
             },
                 {

@@ -1,14 +1,23 @@
-import { Component, signal, AfterViewInit, PLATFORM_ID, inject } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+import { Component, signal, inject, OnInit } from '@angular/core';
 import ClientCardComponent from '../../components/client-card/client-card.component';
-import DirectiveCardComponent from '../../components/directive-card/directive-card.component';
+import DirectiveCardComponent from '../../components/explanations-card/explanations-card.component';
+import { PageHeaderService } from '../../services/page-header.service';
 
 @Component({
   selector: 'app-directivas-page',
   imports: [ClientCardComponent, DirectiveCardComponent],
   templateUrl: './directivas-page.html',
 })
-export default class DirectivasPageComponent {
+export default class DirectivasPageComponent implements OnInit {
+  private readonly titleService = inject(PageHeaderService);
+
+  ngOnInit(): void {
+    this.titleService.setPageInfo(
+      'Directivas: @if, @for y @switch',
+      'Explicación de cómo se utilizan las directivas que extienden las funcionalidades del HTML.'
+    );
+  }
+
   isVisibleText = signal(false);
   colorSelected: string = '';
   toggleText(): void {

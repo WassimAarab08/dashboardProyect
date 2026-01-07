@@ -2,7 +2,7 @@ import { Component, input, AfterViewInit } from '@angular/core';
 
 @Component({
   selector: 'app-directive-card',
-  templateUrl: './directive-card.component.html',
+  templateUrl: './explanations-card.component.html',
 })
 export default class DirectiveCardComponent implements AfterViewInit {
   
