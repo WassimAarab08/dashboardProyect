@@ -83,7 +83,7 @@
 
   <!-- CARD @switch -->
   <app-directive-card
-    [title]="'Switch Selecion'"
+    [title]="'Casos'"
     [directiveName]="'@switch'"
     [description]="descriptionSwitch"
     [themeColor]="'orange'"
@@ -128,5 +128,20 @@
       </p>
       } }
     </div>
+  </app-directive-card>
+
+    <!-- CARD |Pipes -->
+     <app-directive-card
+    [title]="'Transformadores'"
+    [directiveName]="'@Pipes'"
+    [description]="descriptionPipe"
+    [themeColor]="'emerald'"
+    [codeExample]="codePipeExample"
+    [fileName]="'pipes.html'"
+    [footerLabel]="'Pipes'"
+    [footerValue]="'codePipeExample'"
+  >
+    <app-pipes-demo [cliente]="cliente" />
+
   </app-directive-card>
 </div>
