@@ -17,6 +17,14 @@ export default class DataBindingComponent implements OnInit {
     );
   }
 
+  pos = signal({ x: 0, y: 0 });
+  actualizarPosicion(event: MouseEvent) {
+    this.pos.set({
+      x: event.clientX,
+      y: event.clientY
+    });
+  }
+
   interpolacion: string =
     'Interpolación: técnica de Angular que inserta en la plantilla el valor de una variable o expresión del componente usando {{ }}. Permite mostrar datos del TS en la vista de forma simple y reactiva.';
   propertyBinding: string = '/assets/icons/angular.svg';
@@ -30,11 +38,11 @@ export default class DataBindingComponent implements OnInit {
   descriptionInterpolation =
     'Muestra el valor de una variable usando <span class="text-purple-400 font-mono">{{ }}</span>. La interpolación es la forma más simple de insertar datos dinámicos en la vista.';
   descriptionProperty =
-    'Controla propiedades de HTML mediante <span class="text-sky-400 font-mono">[property]</span>. Permite enlazar atributos como src, disabled, href, etc.';
+    'Vincula variables del componente con propiedades del DOM mediante <span class="text-sky-400 font-mono">[property]</span>. A diferencia de la interpolación, <b>preserva el tipo de dato original</b> (booleano, número, objeto) y es más eficiente al evitar conversiones innecesarias a texto.';
   descriptionEvent =
-    'Captura eventos del usuario usando <span class="text-orange-400 font-mono">(evento)</span>. Ejecuta métodos del componente cuando el usuario interactúa.';
+    'Gestiona la interacción del usuario mediante <span class="text-orange-400 font-mono">(evento)</span>, permitiendo el flujo de datos desde la vista hacia la lógica. Permite capturar acciones como clics, escritura o movimiento del ratón. Ejecuta métodos o actualiza Signals, accediendo opcionalmente a los datos mediante <span class="text-orange-400 font-mono">$event</span>. Mueve el ratón sobre el área de la card para observar cómo cambian las coordenadas gracias al evento <span class="text-orange-400 font-mono">(mousemove)</span>.';
   descriptionTwoWay =
-    'Sincroniza input y variable al instante combinando <span class="text-emerald-400 font-mono">[value]</span> y <span class="text-emerald-400 font-mono">(input)</span> para crear flujo bidireccional.';
+    'Sincroniza automáticamente el input y la variable en ambas direcciones. Combina <span class="text-emerald-400 font-mono">[value]</span> (Property Binding: componente → vista, flujo de datos del componente hacia la vista) y <span class="text-emerald-400 font-mono">(input)</span> (Event Binding: vista → componente, flujo de datos de la vista hacia el componente). Angular proporciona la sintaxis <span class="text-emerald-400 font-mono">[()]</span> conocida como <span class="font-semibold">"Banana-in-a-box"</span> para simplificar este patrón bidireccional.';
 
   // Ejemplos de código
   codeInterpolation = `// Lado de HTML
@@ -62,22 +70,38 @@ isDisabled: boolean = false;
   codeEvent = `// Lado de HTML
 <button (click)="sumar()">Sumar</button>
 <button (click)="restar()">Restar</button>
+// Contendero en el que detecta el evento del raton.
+ <div (mousemove)="actualizarPosicion($event)">
+    //....
+     </div>
 
 // Lado TS
+// Funcion que suma a la señal del contador
 eventBinding = signal<number>(0);
-
-sumar() {
-  this.eventBinding.update(n => n + 1);
-}`;
+sumar() { this.eventBinding.update(n => n + 1);}
+// Funcion que procesa el evento y cambia el valor de la señal
+ pos = signal({ x: 0, y: 0 });
+ actualizarPosicion(event: MouseEvent) {
+    this.pos.set({ x: event.clientX, y: event.clientY});
+  }`;
 
   codeTwoWay = `// Lado de HTML
 <input 
   [value]="twoWayBinding()"
-  (input)="twoWayBinding.set(texto.value)"
+  (input)="twoWayBinding.set(texto.value.value)"
   #texto />
 
+// Con ngModel para interferir tipos y usando banana in box
+  <input type="number" [(ngModel)]="puntos" />
+
 // Lado TS
-twoWayBinding = signal("");`;
+
+// Opción A: Para uso solo dentro de este componente
+  twoWayBinding = signal(""); 
+
+// Opción B: Si quieres que un componente PADRE pueda usar [(puntos)]
+  puntos = model(0);
+`;
 
   sumar(): void {
     this.eventBinding.update((n) => n + 1);

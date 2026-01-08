@@ -49,7 +49,7 @@ export class SidebarComponent {
     },
     { 
       id: 'directivas', 
-      label: 'DIRECTIVAS', 
+      label: 'DIRECTIVAS Y PIPES', 
       icon: 'icon-directivas',
       route: '/dashboard/directivas' 
     },

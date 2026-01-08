@@ -1,9 +1,9 @@
-/* You can add global styles to this file, and also import other style files */
 
 @import 'tailwindcss';
 @import 'tailwindcss/theme' layer(theme);
 @import 'tailwindcss/utilities' layer(utilities);
-@custom-variant dark (&:where(:where(.dark, .dark *), @media (prefers-color-scheme: dark)));
+
+@custom-variant dark (&:where(.dark, .dark *), @media (prefers-color-scheme: dark));
 
 
 @import 'highlight.js/styles/base16/ir-black.css';
@@ -185,5 +185,87 @@
   .theme-emerald-dot-shadow {
     @apply bg-emerald-500/80 shadow-[0_0_4px_rgba(16,185,129,0.4)];
   }
+
+  
+  /* Rose (Rosa) */
+  .theme-rose-gradient { @apply from-rose-600/20 via-rose-500/10 to-rose-600/20; }
+  .theme-rose-icon { @apply text-rose-400; }
+  .theme-rose-bg { @apply from-rose-500/[0.02]; }
+  .theme-rose-text { @apply text-rose-500; }
+  .theme-rose-dot { @apply bg-rose-500/40; }
+  .theme-rose-dot-shadow { @apply bg-rose-500/80 shadow-[0_0_4px_rgba(244,63,94,0.4)]; }
+
+  /* Red (Rojo) */
+  .theme-red-gradient { @apply from-red-600/20 via-red-500/10 to-red-600/20; }
+  .theme-red-icon { @apply text-red-400; }
+  .theme-red-bg { @apply from-red-500/[0.02]; }
+  .theme-red-text { @apply text-red-500; }
+  .theme-red-dot { @apply bg-red-500/40; }
+  .theme-red-dot-shadow { @apply bg-red-500/80 shadow-[0_0_4px_rgba(239,68,68,0.4)]; }
+
+  /* Amber (Amarillo/Dorado) */
+  .theme-amber-gradient { @apply from-amber-600/20 via-amber-500/10 to-amber-600/20; }
+  .theme-amber-icon { @apply text-amber-400; }
+  .theme-amber-bg { @apply from-amber-500/[0.02]; }
+  .theme-amber-text { @apply text-amber-500; }
+  .theme-amber-dot { @apply bg-amber-500/40; }
+  .theme-amber-dot-shadow { @apply bg-amber-500/80 shadow-[0_0_4px_rgba(245,158,11,0.4)]; }
+
+  /* Yellow (Amarillo) */
+  .theme-yellow-gradient { @apply from-yellow-600/20 via-yellow-500/10 to-yellow-600/20; }
+  .theme-yellow-icon { @apply text-yellow-400; }
+  .theme-yellow-bg { @apply from-yellow-500/[0.02]; }
+  .theme-yellow-text { @apply text-yellow-500; }
+  .theme-yellow-dot { @apply bg-yellow-500/40; }
+  .theme-yellow-dot-shadow { @apply bg-yellow-500/80 shadow-[0_0_4px_rgba(234,179,8,0.4)]; }
+
+  /* Teal (Verde azulado) */
+  .theme-teal-gradient { @apply from-teal-600/20 via-teal-500/10 to-teal-600/20; }
+  .theme-teal-icon { @apply text-teal-400; }
+  .theme-teal-bg { @apply from-teal-500/[0.02]; }
+  .theme-teal-text { @apply text-teal-500; }
+  .theme-teal-dot { @apply bg-teal-500/40; }
+  .theme-teal-dot-shadow { @apply bg-teal-500/80 shadow-[0_0_4px_rgba(20,184,166,0.4)]; }
+
+  /* Cyan */
+  .theme-cyan-gradient { @apply from-cyan-600/20 via-cyan-500/10 to-cyan-600/20; }
+  .theme-cyan-icon { @apply text-cyan-400; }
+  .theme-cyan-bg { @apply from-cyan-500/[0.02]; }
+  .theme-cyan-text { @apply text-cyan-500; }
+  .theme-cyan-dot { @apply bg-cyan-500/40; }
+  .theme-cyan-dot-shadow { @apply bg-cyan-500/80 shadow-[0_0_4px_rgba(6,182,212,0.4)]; }
+
+  /* Indigo */
+  .theme-indigo-gradient { @apply from-indigo-600/20 via-indigo-500/10 to-indigo-600/20; }
+  .theme-indigo-icon { @apply text-indigo-400; }
+  .theme-indigo-bg { @apply from-indigo-500/[0.02]; }
+  .theme-indigo-text { @apply text-indigo-500; }
+  .theme-indigo-dot { @apply bg-indigo-500/40; }
+  .theme-indigo-dot-shadow { @apply bg-indigo-500/80 shadow-[0_0_4px_rgba(99,102,241,0.4)]; }
+
+  /* Violet */
+  .theme-violet-gradient { @apply from-violet-600/20 via-violet-500/10 to-violet-600/20; }
+  .theme-violet-icon { @apply text-violet-400; }
+  .theme-violet-bg { @apply from-violet-500/[0.02]; }
+  .theme-violet-text { @apply text-violet-500; }
+  .theme-violet-dot { @apply bg-violet-500/40; }
+  .theme-violet-dot-shadow { @apply bg-violet-500/80 shadow-[0_0_4px_rgba(139,92,246,0.4)]; }
+
+  /* Fuchsia (Rosa intenso) */
+  .theme-fuchsia-gradient { @apply from-fuchsia-600/20 via-fuchsia-500/10 to-fuchsia-600/20; }
+  .theme-fuchsia-icon { @apply text-fuchsia-400; }
+  .theme-fuchsia-bg { @apply from-fuchsia-500/[0.02]; }
+  .theme-fuchsia-text { @apply text-fuchsia-500; }
+  .theme-fuchsia-dot { @apply bg-fuchsia-500/40; }
+  .theme-fuchsia-dot-shadow { @apply bg-fuchsia-500/80 shadow-[0_0_4px_rgba(217,70,239,0.4)]; }
+
+  /* Lime (Verde lima) */
+  .theme-lime-gradient { @apply from-lime-600/20 via-lime-500/10 to-lime-600/20; }
+  .theme-lime-icon { @apply text-lime-400; }
+  .theme-lime-bg { @apply from-lime-500/[0.02]; }
+  .theme-lime-text { @apply text-lime-500; }
+  .theme-lime-dot { @apply bg-lime-500/40; }
+  .theme-lime-dot-shadow { @apply bg-lime-500/80 shadow-[0_0_4px_rgba(132,204,22,0.4)]; }
+
 
 }
