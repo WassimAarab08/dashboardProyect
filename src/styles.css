@@ -3,7 +3,7 @@
 @import 'tailwindcss/theme' layer(theme);
 @import 'tailwindcss/utilities' layer(utilities);
 
-@custom-variant dark (&:where(.dark, .dark *), @media (prefers-color-scheme: dark));
+@custom-variant dark (&:where(.dark, .dark *));
 
 
 @import 'highlight.js/styles/base16/ir-black.css';

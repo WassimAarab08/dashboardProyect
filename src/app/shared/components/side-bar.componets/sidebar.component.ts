@@ -87,7 +87,7 @@ export class SidebarComponent {
       id: 'peticiones-HTTP', 
       label: 'PETICIONES-HTTP', 
       icon: 'icon-http',
-      route: '/dashboard/peticiones-HTTP' 
+      route: '/dashboard/peticiones-http' 
     },
   ];
 

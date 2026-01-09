@@ -99,7 +99,8 @@ sumar() { this.eventBinding.update(n => n + 1);}
 // Opción A: Para uso solo dentro de este componente
   twoWayBinding = signal(""); 
 
-// Opción B: Si quieres que un componente PADRE pueda usar [(puntos)]
+// Opción B: Si quieres que un componente 
+// PADRE pueda usar [(puntos)]
   puntos = model(0);
 `;
 
