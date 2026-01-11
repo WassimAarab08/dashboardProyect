@@ -10,7 +10,7 @@ export default class DirectiveCardComponent implements AfterViewInit {
   title = input.required<string>();
   directiveName = input.required<string>();
   description = input.required<string>();
-  themeColor = input.required<'purple' | 'sky' | 'orange' | 'emerald'>();
+  themeColor = input.required<'purple' | 'sky' | 'orange' | 'emerald' | 'lime'>();
   codeExample = input.required<string>();
   fileName = input.required<string>();
   footerLabel = input.required<string>();
