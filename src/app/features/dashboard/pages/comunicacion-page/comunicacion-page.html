@@ -48,10 +48,39 @@
     [themeColor]="'lime'"
     [codeExample]="codeOutputExample"
     [fileName]="'child.component.ts'"
-    [footerLabel]="'Último evento'"
-    [footerValue]="ultimoEvento() || 'Haz click en el botón'"
+    [footerLabel]="'Color seleccionado'"
+    [footerValue]="selectedColor()?.name || 'Selecciona un color'"
   >
-    <app-output-ejemplo (buttonClicked)="ultimoEvento.set($event)"></app-output-ejemplo>
+    <div class="flex flex-col gap-4">
+      <!-- Hijo: Selector de colores -->
+      <app-output-ejemplo (colorSelected)="cambiarColorSelecionado($event)"></app-output-ejemplo>
+      
+      <!-- Padre: Muestra el color recibido -->
+      <div class="p-4 bg-lime-500/5 border border-lime-500/20 rounded-lg">
+        <p class="text-xs text-lime-300 font-mono uppercase tracking-wider mb-3">Padre: Recibiendo eventos del hijo</p>
+        
+        @if (selectedColor()) {
+          <div class="flex items-center gap-4 p-4 bg-slate-900 rounded-xl border-2 transition-all duration-500"
+               [style.border-color]="selectedColor()!.hex">
+            <!-- Preview del color -->
+            <div class="w-20 h-20 rounded-xl shadow-lg transition-all duration-500"
+                 [style.background-color]="selectedColor()!.hex">
+            </div>
+            
+            <!-- Información del color -->
+            <div class="flex-1">
+              <p class="text-lg font-bold text-white mb-1">{{ selectedColor()!.name }}</p>
+              <p class="text-sm font-mono text-slate-400">{{ selectedColor()!.hex }}</p>
+              <p class="text-xs text-lime-400 mt-2">✓ Evento recibido del hijo</p>
+            </div>
+          </div>
+        } @else {
+          <div class="p-6 bg-slate-900 rounded-xl border-2 border-dashed border-slate-700 text-center">
+            <p class="text-slate-500 text-sm">👆 Haz clic en un color arriba</p>
+          </div>
+        }
+      </div>
+    </div>
   </app-directive-card>
 
   <!-- CARD MODEL -->
@@ -59,35 +88,61 @@
     [title]="'Comunicacion bidireccional'"
     [directiveName]="'model()'"
     [description]="descriptionModel"
-    [themeColor]="'purple'"
+    [themeColor]="'orange'"
     [codeExample]="codeModelExample"
-    [fileName]="'counter.component.ts'"
-    [footerLabel]="'Valor sincronizado'"
-    [footerValue]="contadorModel() + ''"
+    [fileName]="'model-ejemplo.component.ts'"
+    [footerLabel]="'Volumen sincronizado'"
+    [footerValue]="volumenModel() + '%'"
   >
     <div class="flex flex-col gap-4">
-      <div class="p-4 bg-purple-500/5 border border-purple-500/20 rounded-lg">
-        <p class="text-xs text-purple-300 font-mono uppercase tracking-wider mb-3">Padre: Control del modelo</p>
-        <div class="flex items-center gap-3">
+      <!-- Padre: controles superiores -->
+      <div class="p-4 bg-orange-500/5 border border-orange-500/20 rounded-lg">
+        <p class="text-xs text-orange-300 font-mono uppercase tracking-wider mb-3">Padre: Controles rápidos </p>
+        <div class="grid grid-cols-4 gap-2 mb-3">
           <button
-            (click)="contadorModel.set(contadorModel() - 1)"
-            class="px-4 py-2 bg-purple-600 hover:bg-purple-500 text-white font-mono rounded-lg transition-all active:scale-95"
+            (click)="volumenModel.set(0)"
+            class="px-3 py-2 bg-orange-600 hover:bg-orange-500 text-white text-xs font-mono rounded-lg transition-all active:scale-95"
           >
-            -
+            0%
           </button>
-          <span class="text-2xl font-bold text-purple-400 min-w-12 text-center">{{ contadorModel() }}</span>
           <button
-            (click)="contadorModel.set(contadorModel() + 1)"
-            class="px-4 py-2 bg-purple-600 hover:bg-purple-500 text-white font-mono rounded-lg transition-all active:scale-95"
+            (click)="volumenModel.set(33)"
+            class="px-3 py-2 bg-orange-600 hover:bg-orange-500 text-white text-xs font-mono rounded-lg transition-all active:scale-95"
           >
-            +
+            33%
+          </button>
+          <button
+            (click)="volumenModel.set(66)"
+            class="px-3 py-2 bg-orange-600 hover:bg-orange-500 text-white text-xs font-mono rounded-lg transition-all active:scale-95"
+          >
+            66%
+          </button>
+          <button
+            (click)="volumenModel.set(100)"
+            class="px-3 py-2 bg-orange-600 hover:bg-orange-500 text-white text-xs font-mono rounded-lg transition-all active:scale-95"
+          >
+            100%
           </button>
         </div>
+    
       </div>
 
-      <div class="p-4 bg-purple-400/10 border border-purple-400/30 rounded-lg">
-        <p class="text-xs text-purple-300 font-mono uppercase tracking-wider mb-2">Sincronización en tiempo real</p>
-        <p class="text-purple-300 text-sm">Valor: <span class="text-purple-100 font-bold">{{ contadorModel() }}</span></p>
+      <!-- Hijo: componente con model() -->
+      <app-model-ejemplo [(volumen)]="volumenModel"></app-model-ejemplo>
+
+      <!-- Indicador de sincronización -->
+      <div class="p-4 bg-orange-400/10 border border-orange-400/30 rounded-xl">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-xs text-orange-300 font-mono uppercase tracking-wider mb-1">Sincronización bidireccional</p>
+            <p class="text-orange-100 text-sm">Valor actual: <span class="text-orange-100 font-bold text-lg">{{ volumenModel() }}%</span></p>
+          </div>
+    
+        </div>
+        <div class="mt-3 p-2 bg-orange-500/40 rounded text-xs text-white">
+          <p>✓ Padre modifica → Hijo actualiza</p>
+          <p>✓ Hijo modifica → Padre actualiza</p>
+        </div>
       </div>
     </div>
   </app-directive-card>

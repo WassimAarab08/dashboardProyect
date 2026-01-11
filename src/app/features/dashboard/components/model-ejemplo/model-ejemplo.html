@@ -1,0 +1,60 @@
+<div class="p-5 bg-orange-500/5 border border-orange-500/20 rounded-lg">
+  <p class="text-xs text-orange-300 font-mono uppercase tracking-wider mb-4">Hijo: Control de volumen </p>
+  
+  <!-- Display visual del volumen -->
+  <div class="mb-6 p-4 rounded-xl transition-all duration-300"
+       [style.background-color]="nivelVolumen().color + '15'">
+    <div class="flex items-center justify-center gap-3 mb-2">
+      <span class="text-4xl">{{ nivelVolumen().icon }}</span>
+      <span class="text-3xl font-bold text-white">{{ volumen() }}%</span>
+    </div>
+    <p class="text-center text-sm font-mono"
+       [style.color]="nivelVolumen().color">
+      Nivel: {{ nivelVolumen().texto }}
+    </p>
+  </div>
+  
+  <!-- Slider (el hijo puede modificar) -->
+  <div class="mb-4">
+    <input
+      type="range"
+      min="0"
+      max="100"
+      [value]="volumen()"
+      (input)="volumen.set(+$any($event.target).value)"
+      class="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-orange-500"
+    />
+  </div>
+  
+  <!-- Botones de control del hijo -->
+  <div class="grid grid-cols-2 gap-2">
+    <button
+      (click)="disminuir()"
+      [disabled]="volumen() === 0"
+      class="px-3 py-2 bg-orange-600 hover:bg-orange-500 disabled:bg-slate-700 disabled:text-slate-500 text-white text-sm font-mono rounded-lg transition-all active:scale-95"
+    >
+      -10%
+    </button>
+    <button
+      (click)="aumentar()"
+      [disabled]="volumen() === 100"
+      class="px-3 py-2 bg-orange-600 hover:bg-orange-500 disabled:bg-slate-700 disabled:text-slate-500 text-white text-sm font-mono rounded-lg transition-all active:scale-95"
+    >
+      +10%
+    </button>
+    <button
+      (click)="silenciar()"
+      class="px-3 py-2 bg-slate-600 hover:bg-slate-500 text-white text-sm font-mono rounded-lg transition-all active:scale-95"
+    >
+      🔇 Silencio
+    </button>
+    <button
+      (click)="maximizar()"
+      class="px-3 py-2 bg-slate-600 hover:bg-slate-500 text-white text-sm font-mono rounded-lg transition-all active:scale-95"
+    >
+      🔊 Max
+    </button>
+  </div>
+  
+
+</div>
