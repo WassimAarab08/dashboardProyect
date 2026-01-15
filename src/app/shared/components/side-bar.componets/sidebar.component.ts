@@ -71,24 +71,24 @@ export class SidebarComponent {
       icon: 'icon-servicios',
       route: '/dashboard/servicios' 
     },
-      { 
-      id: 'modulos', 
-      label: 'MODULOS', 
-      icon: 'icon-modulos',
-      route: '/dashboard/modulos' 
-    },
-      { 
-      id: 'hostlistener-hostbinding', 
-      label: 'HOSTLISTENER-HOSTBINDING', 
-      icon: 'icon-hostlistener',
-      route: '/dashboard/hostlistener-hostbinding' 
-    },
-    { 
-      id: 'peticiones-HTTP', 
-      label: 'PETICIONES-HTTP', 
-      icon: 'icon-http',
-      route: '/dashboard/peticiones-http' 
-    },
+    //   { 
+    //   id: 'modulos', 
+    //   label: 'MODULOS', 
+    //   icon: 'icon-modulos',
+    //   route: '/dashboard/modulos' 
+    // },
+    //   { 
+    //   id: 'hostlistener-hostbinding', 
+    //   label: 'HOSTLISTENER-HOSTBINDING', 
+    //   icon: 'icon-hostlistener',
+    //   route: '/dashboard/hostlistener-hostbinding' 
+    // },
+    // { 
+    //   id: 'peticiones-HTTP', 
+    //   label: 'PETICIONES-HTTP', 
+    //   icon: 'icon-http',
+    //   route: '/dashboard/peticiones-http' 
+    // },
   ];
 
 
