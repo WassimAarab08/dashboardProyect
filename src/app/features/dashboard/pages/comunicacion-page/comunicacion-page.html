@@ -159,7 +159,7 @@
     [footerValue]="urlParams().id ? 'Detectados ✓' : 'Sin parámetros'"
   >
     <div class="flex flex-col gap-4">
-      <!-- Instrucciones -->
+
       <div class="p-4 bg-cyan-500/5 border border-cyan-500/20 rounded-lg">
         <p class="text-xs text-cyan-300 font-mono uppercase tracking-wider mb-3">Envía datos mediante la URL</p>
         <p class="text-sm text-cyan-100 mb-4">
@@ -225,6 +225,89 @@
         <p class="text-xs text-cyan-200">
           Los parámetros se agregan a la URL y se pueden compartir. 
           Útil para filtros, búsquedas o cualquier estado que quieras mantener persistente.
+        </p>
+      </div>
+    </div>
+  </app-directive-card>
+
+  <!-- CARD LOCALSTORAGE -->
+  <app-directive-card
+    [title]="'Guardar datos en el navegador'"
+    [directiveName]="'localStorage'"
+    [description]="descriptionLocalStorage"
+    [themeColor]="'pink'"
+    [codeExample]="codeLocalStorageExample"
+    [fileName]="'component.ts'"
+    [footerLabel]="'Estado'"
+    [footerValue]="localStorageData().usuario ? 'Datos guardados ✓' : 'Sin datos'"
+  >
+    <div class="flex flex-col gap-4">
+      <!-- Botones para guardar datos -->
+      <div class="p-4 bg-pink-500/5 border border-pink-500/20 rounded-lg">
+        <p class="text-xs text-pink-300 font-mono uppercase tracking-wider mb-3">Guardar datos en el navegador</p>
+        <p class="text-sm text-pink-100 mb-4">
+          Los datos se guardan en el navegador y persisten al recargar la página:
+        </p>
+        <div class="flex flex-wrap gap-2">
+          <button 
+            (click)="guardarEnLocalStorage('Carlos', 'Modo Oscuro', 'Azul')"
+            class="px-4 py-2 bg-pink-600 hover:bg-pink-500 text-white text-xs font-mono rounded-lg transition-all active:scale-95 cursor-pointer"
+          >
+            Ejemplo 1
+          </button>
+          <button 
+            (click)="guardarEnLocalStorage('Ana', 'Modo Claro', 'Verde')"
+            class="px-4 py-2 bg-pink-600 hover:bg-pink-500 text-white text-xs font-mono rounded-lg transition-all active:scale-95 cursor-pointer"
+          >
+            Ejemplo 2
+          </button>
+          <button 
+            (click)="limpiarLocalStorage()"
+            class="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white text-xs font-mono rounded-lg transition-all active:scale-95 cursor-pointer"
+          >
+            Limpiar
+          </button>
+        </div>
+      </div>
+
+      <!-- Muestra los datos guardados -->
+      <div class="p-4 bg-pink-500/5 border border-pink-500/20 rounded-lg">
+        <p class="text-xs text-pink-300 font-mono uppercase tracking-wider mb-3">Datos guardados en localStorage</p>
+        
+        @if (localStorageData().usuario || localStorageData().preferencia || localStorageData().tema) {
+          <div class="space-y-2">
+            @if (localStorageData().usuario) {
+              <div class="p-3 bg-slate-900 rounded-lg border-l-2 border-pink-400">
+                <p class="text-xs text-pink-300 font-mono uppercase mb-1">Usuario</p>
+                <p class="text-white font-mono">{{ localStorageData().usuario }}</p>
+              </div>
+            }
+            @if (localStorageData().preferencia) {
+              <div class="p-3 bg-slate-900 rounded-lg border-l-2 border-pink-400">
+                <p class="text-xs text-pink-300 font-mono uppercase mb-1">Preferencia</p>
+                <p class="text-white font-mono">{{ localStorageData().preferencia }}</p>
+              </div>
+            }
+            @if (localStorageData().tema) {
+              <div class="p-3 bg-slate-900 rounded-lg border-l-2 border-pink-400">
+                <p class="text-xs text-pink-300 font-mono uppercase mb-1">Tema</p>
+                <p class="text-white font-mono">{{ localStorageData().tema }}</p>
+              </div>
+            }
+          </div>
+        } @else {
+          <div class="p-6 bg-slate-900 rounded-xl border-2 border-dashed border-slate-700 text-center">
+            <p class="text-slate-500 text-sm">👆 Haz clic en un botón arriba para guardar datos</p>
+          </div>
+        }
+      </div>
+
+      <!-- Info sobre localStorage -->
+      <div class="p-4 bg-pink-400/10 border border-pink-400/30 rounded-xl">
+        <p class="text-xs text-pink-300 font-mono uppercase tracking-wider mb-2">💡 Persistencia local</p>
+        <p class="text-xs text-pink-200">
+          Los datos se guardan en tu navegador y permanecen incluso al cerrar la pestaña. 
+          Recarga la página y verás que los datos siguen ahí.
         </p>
       </div>
     </div>

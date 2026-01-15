@@ -36,6 +36,8 @@ private readonly paramsSignal = toSignal(this.route.queryParams, { initialValue:
     };
   });
 
+  localStorageData = signal<{usuario?: string; preferencia?: string; tema?: string}>({});
+
    // Mantien la ruta acual y le pasa los paramentros y hace un merge si tiene mas 
   actualizarUrlParams(id?: string, nombre?: string, mensaje?: string) {
     this.router.navigate([], {
@@ -57,6 +59,29 @@ private readonly paramsSignal = toSignal(this.route.queryParams, { initialValue:
       'Comunicaciones',
       'Explicación de cómo se usan input, output y model para comunicacion entre componentes.'
     );
+    this.cargarLocalStorage();
+  }
+
+  guardarEnLocalStorage(usuario: string, preferencia: string, tema: string) {
+    localStorage.setItem('usuario', usuario);
+    localStorage.setItem('preferencia', preferencia);
+    localStorage.setItem('tema', tema);
+    this.cargarLocalStorage();
+  }
+
+  cargarLocalStorage() {
+    this.localStorageData.set({
+      usuario: localStorage.getItem('usuario') || undefined,
+      preferencia: localStorage.getItem('preferencia') || undefined,
+      tema: localStorage.getItem('tema') || undefined
+    });
+  }
+
+  limpiarLocalStorage() {
+    localStorage.removeItem('usuario');
+    localStorage.removeItem('preferencia');
+    localStorage.removeItem('tema');
+    this.cargarLocalStorage();
   }
 
   cambiarColorSelecionado(ColorEnviado: ColorEnviado) {
@@ -147,10 +172,6 @@ export class ModelEjemplo {
     'Pasar datos mediante la <span class="text-cyan-400 font-mono">URL</span> es útil para mantener el estado en la barra de direcciones. Usa <span class="text-cyan-400 font-mono">ActivatedRoute</span> para leer parámetros de consulta con <span class="text-cyan-400 font-mono">queryParams</span>. Ideal para filtros, búsquedas o navegación con estado persistente que el usuario puede compartir.';
 
   codeUrlExample = `
-// Componente - Forma moderna con signals
-import { ActivatedRoute, Router } from '@angular/router';
-import { toSignal } from '@angular/core/rxjs-interop';
-
 @Component({ selector: 'app-comunicacion' })
 export class ComunicacionPageComponent {
   private route = inject(ActivatedRoute);
@@ -180,12 +201,54 @@ export class ComunicacionPageComponent {
 
 // HTML
 <button (click)="actualizarUrlParams('123', 'Juan', 'Hola')">
-  Enviar parámetros
-</button>
+  Enviar parámetros </button>
 
 <!-- Los datos se actualizan automáticamente -->
 <p>Nombre: {{ urlParams().nombre }}</p>
+  `;
 
-// URL resultante: /comunicacion?id=123&nombre=Juan&mensaje=Hola
+  descriptionLocalStorage =
+    'El <span class="text-pink-400 font-mono">localStorage</span> permite guardar datos en el navegador de forma persistente. Los datos permanecen incluso después de cerrar el navegador. Usa <span class="text-pink-400 font-mono">localStorage.setItem()</span> para guardar y <span class="text-pink-400 font-mono">localStorage.getItem()</span> para leer. Ideal para preferencias de usuario, temas, o datos que no requieren servidor.';
+
+  codeLocalStorageExample = `
+// Componente con localStorage
+@Component({ selector: 'app-comunicacion' })
+export class ComunicacionPageComponent {
+  localStorageData = signal<any>({});
+  
+  // Guardar en localStorage
+  guardarEnLocalStorage(usuario: string, tema: string) {
+    localStorage.setItem('usuario', usuario);
+    localStorage.setItem('tema', tema);
+    this.cargarLocalStorage();
+  }
+  
+  // Leer desde localStorage
+  cargarLocalStorage() {
+    this.localStorageData.set({
+      usuario: localStorage.getItem('usuario'),
+      tema: localStorage.getItem('tema')
+    });
+  }
+  
+  // Limpiar localStorage
+  limpiarLocalStorage() {
+    localStorage.removeItem('usuario');
+    localStorage.removeItem('tema');
+    this.cargarLocalStorage();
+  }
+  
+  ngOnInit() {
+    this.cargarLocalStorage(); // Cargar al iniciar
+  }
+}
+
+// HTML
+<button (click)="guardarEnLocalStorage('Juan', 'oscuro')">
+  Guardar
+</button>
+<p>Usuario: {{ localStorageData().usuario }}</p>
+
+// Los datos persisten incluso al recargar la página
   `;
 }
