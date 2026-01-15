@@ -1,6 +1,7 @@
 import { Component, inject, OnInit, signal, computed } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { PageHeaderService } from '../../services/page-header.service';
+import { LocalStorageService } from '../../../../core/services/local-storage.service';
 import DirectiveCardComponent from '../../components/explanations-card/explanations-card.component';
 import InputEjemplo from '../../components/input-ejemplo/input-ejemplo';
 import OutputEjemplo from '../../components/output-ejemplo/output-ejemplo';
@@ -22,6 +23,7 @@ private readonly titleService = inject(PageHeaderService);
 private readonly route = inject(ActivatedRoute);
 private readonly router = inject(Router);
 private readonly paramsSignal = toSignal(this.route.queryParams, { initialValue: {} });
+readonly localStorageService = inject(LocalStorageService);
 
    variableInput = signal("");
    volumenModel = signal(50);
@@ -35,8 +37,6 @@ private readonly paramsSignal = toSignal(this.route.queryParams, { initialValue:
       mensaje: params['mensaje'] as string | undefined
     };
   });
-
-  localStorageData = signal<{usuario?: string; preferencia?: string; tema?: string}>({});
 
    // Mantien la ruta acual y le pasa los paramentros y hace un merge si tiene mas 
   actualizarUrlParams(id?: string, nombre?: string, mensaje?: string) {
@@ -59,29 +59,14 @@ private readonly paramsSignal = toSignal(this.route.queryParams, { initialValue:
       'Comunicaciones',
       'Explicación de cómo se usan input, output y model para comunicacion entre componentes.'
     );
-    this.cargarLocalStorage();
   }
 
   guardarEnLocalStorage(usuario: string, preferencia: string, tema: string) {
-    localStorage.setItem('usuario', usuario);
-    localStorage.setItem('preferencia', preferencia);
-    localStorage.setItem('tema', tema);
-    this.cargarLocalStorage();
-  }
-
-  cargarLocalStorage() {
-    this.localStorageData.set({
-      usuario: localStorage.getItem('usuario') || undefined,
-      preferencia: localStorage.getItem('preferencia') || undefined,
-      tema: localStorage.getItem('tema') || undefined
-    });
+    this.localStorageService.guardar(usuario, preferencia, tema);
   }
 
   limpiarLocalStorage() {
-    localStorage.removeItem('usuario');
-    localStorage.removeItem('preferencia');
-    localStorage.removeItem('tema');
-    this.cargarLocalStorage();
+    this.localStorageService.limpiar();
   }
 
   cambiarColorSelecionado(ColorEnviado: ColorEnviado) {
@@ -211,43 +196,53 @@ export class ComunicacionPageComponent {
     'El <span class="text-pink-400 font-mono">localStorage</span> permite guardar datos en el navegador de forma persistente. Los datos permanecen incluso después de cerrar el navegador. Usa <span class="text-pink-400 font-mono">localStorage.setItem()</span> para guardar y <span class="text-pink-400 font-mono">localStorage.getItem()</span> para leer. Ideal para preferencias de usuario, temas, o datos que no requieren servidor.';
 
   codeLocalStorageExample = `
-// Componente con localStorage
-@Component({ selector: 'app-comunicacion' })
-export class ComunicacionPageComponent {
-  localStorageData = signal<any>({});
-  
-  // Guardar en localStorage
-  guardarEnLocalStorage(usuario: string, tema: string) {
-    localStorage.setItem('usuario', usuario);
-    localStorage.setItem('tema', tema);
-    this.cargarLocalStorage();
+// Servicio de localStorage (local-storage.service.ts)
+@Injectable({ providedIn: 'root' })
+export class LocalStorageService {
+  data = signal<StoredData>({});
+
+  constructor() {
+    this.cargar(); // Carga automática al iniciar
   }
-  
-  // Leer desde localStorage
-  cargarLocalStorage() {
-    this.localStorageData.set({
-      usuario: localStorage.getItem('usuario'),
-      tema: localStorage.getItem('tema')
+
+  guardar(usuario: string, preferencia: string, tema: string) {
+    localStorage.setItem('usuario', usuario);
+    localStorage.setItem('preferencia', preferencia);
+    localStorage.setItem('tema', tema);
+    this.cargar();
+  }
+
+  cargar() {
+    this.data.set({
+      usuario: localStorage.getItem('usuario') || undefined,
+      preferencia: localStorage.getItem('preferencia') || undefined,
+      tema: localStorage.getItem('tema') || undefined
     });
   }
-  
-  // Limpiar localStorage
-  limpiarLocalStorage() {
+
+  limpiar() {
     localStorage.removeItem('usuario');
+    localStorage.removeItem('preferencia');
     localStorage.removeItem('tema');
-    this.cargarLocalStorage();
+    this.cargar();
   }
+}
+
+// Componente
+@Component({ selector: 'app-comunicacion' })
+export class ComunicacionPageComponent {
+  localStorageService = inject(LocalStorageService);
   
-  ngOnInit() {
-    this.cargarLocalStorage(); // Cargar al iniciar
+  guardarEnLocalStorage(usuario: string, pref: string, tema: string) {
+    this.localStorageService.guardar(usuario, pref, tema);
   }
 }
 
 // HTML
-<button (click)="guardarEnLocalStorage('Juan', 'oscuro')">
+<button (click)="guardarEnLocalStorage('Juan', 'Oscuro', 'Azul')">
   Guardar
 </button>
-<p>Usuario: {{ localStorageData().usuario }}</p>
+<p>Usuario: {{ localStorageService.data().usuario }}</p>
 
 // Los datos persisten incluso al recargar la página
   `;

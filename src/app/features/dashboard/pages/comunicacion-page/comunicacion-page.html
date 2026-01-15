@@ -232,14 +232,14 @@
 
   <!-- CARD LOCALSTORAGE -->
   <app-directive-card
-    [title]="'Guardar datos en el navegador'"
+    [title]="'Guardar datos'"
     [directiveName]="'localStorage'"
     [description]="descriptionLocalStorage"
     [themeColor]="'pink'"
     [codeExample]="codeLocalStorageExample"
     [fileName]="'component.ts'"
     [footerLabel]="'Estado'"
-    [footerValue]="localStorageData().usuario ? 'Datos guardados ✓' : 'Sin datos'"
+    [footerValue]="localStorageService.data().usuario ? 'Datos guardados ✓' : 'Sin datos'"
   >
     <div class="flex flex-col gap-4">
       <!-- Botones para guardar datos -->
@@ -274,24 +274,24 @@
       <div class="p-4 bg-pink-500/5 border border-pink-500/20 rounded-lg">
         <p class="text-xs text-pink-300 font-mono uppercase tracking-wider mb-3">Datos guardados en localStorage</p>
         
-        @if (localStorageData().usuario || localStorageData().preferencia || localStorageData().tema) {
+        @if (localStorageService.data().usuario || localStorageService.data().preferencia || localStorageService.data().tema) {
           <div class="space-y-2">
-            @if (localStorageData().usuario) {
+            @if (localStorageService.data().usuario) {
               <div class="p-3 bg-slate-900 rounded-lg border-l-2 border-pink-400">
                 <p class="text-xs text-pink-300 font-mono uppercase mb-1">Usuario</p>
-                <p class="text-white font-mono">{{ localStorageData().usuario }}</p>
+                <p class="text-white font-mono">{{ localStorageService.data().usuario }}</p>
               </div>
             }
-            @if (localStorageData().preferencia) {
+            @if (localStorageService.data().preferencia) {
               <div class="p-3 bg-slate-900 rounded-lg border-l-2 border-pink-400">
                 <p class="text-xs text-pink-300 font-mono uppercase mb-1">Preferencia</p>
-                <p class="text-white font-mono">{{ localStorageData().preferencia }}</p>
+                <p class="text-white font-mono">{{ localStorageService.data().preferencia }}</p>
               </div>
             }
-            @if (localStorageData().tema) {
+            @if (localStorageService.data().tema) {
               <div class="p-3 bg-slate-900 rounded-lg border-l-2 border-pink-400">
                 <p class="text-xs text-pink-300 font-mono uppercase mb-1">Tema</p>
-                <p class="text-white font-mono">{{ localStorageData().tema }}</p>
+                <p class="text-white font-mono">{{ localStorageService.data().tema }}</p>
               </div>
             }
           </div>
