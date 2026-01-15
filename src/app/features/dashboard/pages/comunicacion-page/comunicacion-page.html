@@ -156,7 +156,7 @@
     [codeExample]="codeUrlExample"
     [fileName]="'component.ts'"
     [footerLabel]="'Parámetros URL'"
-    [footerValue]="urlParams()?.id ? 'Detectados ✓' : 'Sin parámetros'"
+    [footerValue]="urlParams().id ? 'Detectados ✓' : 'Sin parámetros'"
   >
     <div class="flex flex-col gap-4">
       <!-- Instrucciones -->
@@ -219,12 +219,13 @@
         }
       </div>
 
-      <!-- URL actual -->
+      <!-- Info sobre URL params -->
       <div class="p-4 bg-cyan-400/10 border border-cyan-400/30 rounded-xl">
-        <p class="text-xs text-cyan-300 font-mono uppercase tracking-wider mb-2">URL Actual</p>
-        <div class="bg-slate-950 rounded p-3 border border-slate-700 break-all">
-          <p class="text-xs text-slate-400 font-mono">{{ window.location.href }}</p>
-        </div>
+        <p class="text-xs text-cyan-300 font-mono uppercase tracking-wider mb-2">💡 Query Params</p>
+        <p class="text-xs text-cyan-200">
+          Los parámetros se agregan a la URL y se pueden compartir. 
+          Útil para filtros, búsquedas o cualquier estado que quieras mantener persistente.
+        </p>
       </div>
     </div>
   </app-directive-card>

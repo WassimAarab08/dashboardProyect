@@ -1,5 +1,5 @@
 import { Component, inject, OnInit, signal, computed } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, Params } from '@angular/router';
 import { PageHeaderService } from '../../services/page-header.service';
 import DirectiveCardComponent from '../../components/explanations-card/explanations-card.component';
 import InputEjemplo from '../../components/input-ejemplo/input-ejemplo';
@@ -28,15 +28,13 @@ private readonly paramsSignal = toSignal(this.route.queryParams, { initialValue:
    selectedColor = signal<ColorEnviado | null>(null);
    
    urlParams = computed(() => {
-    const params = this.paramsSignal() as any;
+    const params: Params = this.paramsSignal();
     return {
-      id: params['id'],
-      nombre: params['nombre'],
-      mensaje: params['mensaje']
+      id: params['id'] as string | undefined,
+      nombre: params['nombre'] as string | undefined,
+      mensaje: params['mensaje'] as string | undefined
     };
   });
-   
-   window = window;
 
    // Mantien la ruta acual y le pasa los paramentros y hace un merge si tiene mas 
   actualizarUrlParams(id?: string, nombre?: string, mensaje?: string) {
@@ -46,8 +44,6 @@ private readonly paramsSignal = toSignal(this.route.queryParams, { initialValue:
       queryParamsHandling: 'merge'
     });
   }
-
-  
 
   limpiarUrlParams() {
     this.router.navigate([], {
