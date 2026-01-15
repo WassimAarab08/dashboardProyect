@@ -147,4 +147,86 @@
     </div>
   </app-directive-card>
 
+  <!-- CARD URL PARAMS -->
+  <app-directive-card
+    [title]="'Pasar datos mediante URL'"
+    [directiveName]="'queryParams'"
+    [description]="descriptionUrl"
+    [themeColor]="'cyan'"
+    [codeExample]="codeUrlExample"
+    [fileName]="'component.ts'"
+    [footerLabel]="'Parámetros URL'"
+    [footerValue]="urlParams()?.id ? 'Detectados ✓' : 'Sin parámetros'"
+  >
+    <div class="flex flex-col gap-4">
+      <!-- Instrucciones -->
+      <div class="p-4 bg-cyan-500/5 border border-cyan-500/20 rounded-lg">
+        <p class="text-xs text-cyan-300 font-mono uppercase tracking-wider mb-3">Envía datos mediante la URL</p>
+        <p class="text-sm text-cyan-100 mb-4">
+          Prueba haciendo clic en los botones para agregar parámetros a la URL:
+        </p>
+        <div class="flex flex-wrap gap-2">
+          <button 
+            (click)="actualizarUrlParams('001', 'Juan', 'Hola desde la URL')"
+            class="px-4 py-2 bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-mono rounded-lg transition-all active:scale-95 cursor-pointer"
+          >
+            Ejemplo 1
+          </button>
+          <button 
+            (click)="actualizarUrlParams('002', 'María', 'Parámetros persistentes')"
+            class="px-4 py-2 bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-mono rounded-lg transition-all active:scale-95 cursor-pointer"
+          >
+            Ejemplo 2
+          </button>
+          <button 
+            (click)="limpiarUrlParams()"
+            class="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white text-xs font-mono rounded-lg transition-all active:scale-95 cursor-pointer"
+          >
+            Limpiar
+          </button>
+        </div>
+      </div>
+
+      <!-- Muestra los parámetros recibidos -->
+      <div class="p-4 bg-cyan-500/5 border border-cyan-500/20 rounded-lg">
+        <p class="text-xs text-cyan-300 font-mono uppercase tracking-wider mb-3">Datos recibidos desde la URL</p>
+        
+        @if (urlParams().id || urlParams().nombre || urlParams().mensaje) {
+          <div class="space-y-2">
+            @if (urlParams().id) {
+              <div class="p-3 bg-slate-900 rounded-lg border-l-2 border-cyan-400">
+                <p class="text-xs text-cyan-300 font-mono uppercase mb-1">ID</p>
+                <p class="text-white font-mono">{{ urlParams().id }}</p>
+              </div>
+            }
+            @if (urlParams().nombre) {
+              <div class="p-3 bg-slate-900 rounded-lg border-l-2 border-cyan-400">
+                <p class="text-xs text-cyan-300 font-mono uppercase mb-1">Nombre</p>
+                <p class="text-white font-mono">{{ urlParams().nombre }}</p>
+              </div>
+            }
+            @if (urlParams().mensaje) {
+              <div class="p-3 bg-slate-900 rounded-lg border-l-2 border-cyan-400">
+                <p class="text-xs text-cyan-300 font-mono uppercase mb-1">Mensaje</p>
+                <p class="text-white font-mono">{{ urlParams().mensaje }}</p>
+              </div>
+            }
+          </div>
+        } @else {
+          <div class="p-6 bg-slate-900 rounded-xl border-2 border-dashed border-slate-700 text-center">
+            <p class="text-slate-500 text-sm">👆 Haz clic en un botón arriba para agregar parámetros a la URL</p>
+          </div>
+        }
+      </div>
+
+      <!-- URL actual -->
+      <div class="p-4 bg-cyan-400/10 border border-cyan-400/30 rounded-xl">
+        <p class="text-xs text-cyan-300 font-mono uppercase tracking-wider mb-2">URL Actual</p>
+        <div class="bg-slate-950 rounded p-3 border border-slate-700 break-all">
+          <p class="text-xs text-slate-400 font-mono">{{ window.location.href }}</p>
+        </div>
+      </div>
+    </div>
+  </app-directive-card>
+
 </div>

@@ -1,9 +1,11 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal, computed } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PageHeaderService } from '../../services/page-header.service';
 import DirectiveCardComponent from '../../components/explanations-card/explanations-card.component';
 import InputEjemplo from '../../components/input-ejemplo/input-ejemplo';
 import OutputEjemplo from '../../components/output-ejemplo/output-ejemplo';
 import ModelEjemplo from '../../components/model-ejemplo/model-ejemplo';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 interface ColorEnviado {
   name: string;
@@ -17,10 +19,42 @@ interface ColorEnviado {
 })
 export default class ComunicacionPageComponent implements OnInit {
 private readonly titleService = inject(PageHeaderService);
+private readonly route = inject(ActivatedRoute);
+private readonly router = inject(Router);
+private readonly paramsSignal = toSignal(this.route.queryParams, { initialValue: {} });
 
    variableInput = signal("");
    volumenModel = signal(50);
    selectedColor = signal<ColorEnviado | null>(null);
+   
+   urlParams = computed(() => {
+    const params = this.paramsSignal() as any;
+    return {
+      id: params['id'],
+      nombre: params['nombre'],
+      mensaje: params['mensaje']
+    };
+  });
+   
+   window = window;
+
+   // Mantien la ruta acual y le pasa los paramentros y hace un merge si tiene mas 
+  actualizarUrlParams(id?: string, nombre?: string, mensaje?: string) {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { id, nombre, mensaje },
+      queryParamsHandling: 'merge'
+    });
+  }
+
+  
+
+  limpiarUrlParams() {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: {}
+    });
+  }
 
   ngOnInit(): void {
     this.titleService.setPageInfo(
@@ -113,5 +147,49 @@ export class ModelEjemplo {
 <button (click)="volumenModel.set(100)">Max</button>
 <!--  El hijo recibe el cambio automáticamente -->
   `;
+  descriptionUrl =
+    'Pasar datos mediante la <span class="text-cyan-400 font-mono">URL</span> es útil para mantener el estado en la barra de direcciones. Usa <span class="text-cyan-400 font-mono">ActivatedRoute</span> para leer parámetros de consulta con <span class="text-cyan-400 font-mono">queryParams</span>. Ideal para filtros, búsquedas o navegación con estado persistente que el usuario puede compartir.';
 
+  codeUrlExample = `
+// Componente - Forma moderna con signals
+import { ActivatedRoute, Router } from '@angular/router';
+import { toSignal } from '@angular/core/rxjs-interop';
+
+@Component({ selector: 'app-comunicacion' })
+export class ComunicacionPageComponent {
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  
+  // Convierte queryParams Observable a Signal
+  private paramsSignal = toSignal(this.route.queryParams, { initialValue: {} });
+  
+  // Computed: se actualiza automáticamente cuando cambian los params
+  urlParams = computed(() => {
+    const params = this.paramsSignal() as any;
+    return {
+      id: params['id'],
+      nombre: params['nombre'],
+      mensaje: params['mensaje']
+    };
+  });
+  
+  // Método para actualizar la URL
+  actualizarUrlParams(id: string, nombre: string, mensaje: string) {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { id, nombre, mensaje }
+    });
+  }
+}
+
+// HTML
+<button (click)="actualizarUrlParams('123', 'Juan', 'Hola')">
+  Enviar parámetros
+</button>
+
+<!-- Los datos se actualizan automáticamente -->
+<p>Nombre: {{ urlParams().nombre }}</p>
+
+// URL resultante: /comunicacion?id=123&nombre=Juan&mensaje=Hola
+  `;
 }
