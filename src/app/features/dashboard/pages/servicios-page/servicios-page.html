@@ -1,0 +1,12 @@
+<div class=" flex flex-row ">
+
+    @for (item of lista_productos(); track item.id) {
+
+     <app-product-card
+     [product]="item"
+     ></app-product-card>
+
+
+    }
+
+</div>
