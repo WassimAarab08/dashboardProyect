@@ -16,4 +16,5 @@ export default class DashboardPage {
 
    title= this.titleService.pageTitle
    descriptiom =this.titleService.pageDescription
+   isOn=this.titleService.turnOn
  }

@@ -5,7 +5,7 @@ import { Injectable, signal } from '@angular/core';
 })
 export class PageHeaderService {
   pageTitle = signal<string>('');
-
+  turnOn= signal(true)
   pageDescription = signal<string>('');
 
   setTitle(title: string) {
@@ -15,8 +15,11 @@ export class PageHeaderService {
     this.pageDescription.set(description);
   }
 
-  setPageInfo(title: string, description: string): void {
+  setPageInfo(title: string, description: string ): void {
     this.pageTitle.set(title);
     this.pageDescription.set(description);
+  }
+  turnOff(){
+     this.turnOn.set(false)
   }
 }
