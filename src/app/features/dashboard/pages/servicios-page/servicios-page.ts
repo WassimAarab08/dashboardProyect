@@ -7,7 +7,7 @@ import { ModalCreateProduct } from '../../components/modal-create-product/modal-
 
 @Component({
   selector: 'app-servicios-page',
-  imports: [ProductCard, ModalCreateProduct, CommonModule],
+  imports: [ProductCard, ModalCreateProduct],
   templateUrl: './servicios-page.html',
 })
 export default class ServiciosPageComponent implements OnInit {
@@ -24,8 +24,4 @@ export default class ServiciosPageComponent implements OnInit {
   openModal(){
     this.isModalOpen.update((model) => !model)
   }
-
-
-
-
 }
