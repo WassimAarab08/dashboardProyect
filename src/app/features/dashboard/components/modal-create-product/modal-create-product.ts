@@ -1,193 +1,116 @@
-import { ChangeDetectionStrategy, Component, inject, model, signal, effect, ViewChild, ElementRef } from '@angular/core';
+import { Component, signal, inject, Output, EventEmitter, ChangeDetectionStrategy, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-modal-create-product',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './modal-create-product.html',
-  styles: [`
-    :host { display: block; }
-    input::-webkit-outer-spin-button,
-    input::-webkit-inner-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
-    select { background-image: none !important; }
-
-    @keyframes zoom-in-95 {
-      from { transform: scale(0.95); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
-    @keyframes fade-in {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    @keyframes slide-in-from-bottom {
-      from { transform: translateY(100%); }
-      to { transform: translateY(0); }
-    }
-    .animate-in { animation-fill-mode: forwards; }
-  `]
+	selector: 'app-modal-create-product',
+	standalone: true,
+	imports: [CommonModule, ReactiveFormsModule, FormsModule],
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	templateUrl: './modal-create-product.html',
 })
-export class ModalCreateProduct { 
+export class ModalCreateProduct implements OnChanges {
+	private fb = inject(FormBuilder);
 
-  @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
-  @ViewChild('modalOverlay') modalOverlay!: ElementRef<HTMLDivElement>;
+	@Input() isOpen?: boolean;
+	@Output() isOpenChange = new EventEmitter<boolean>();
+	@Output() onRegister = new EventEmitter<any>();
+	@Output() onClose = new EventEmitter<void>();
 
-  private fb = inject(FormBuilder);
+	isModalOpen = signal(false);
+	isDragging = signal(false);
+	imagePreview = signal<string | null>(null);
 
-  isOpen = model(false);
-  isSubmitting = signal(false);
-  showSuccess = signal(false);
-  imagePreview = signal<string | null>(null);
+	categorias = ['Audio', 'Video', 'Accesorios', 'Computación', 'Gaming'];
 
+	inventoryForm: FormGroup = this.fb.group({
+		modelo: ['', [Validators.required, Validators.minLength(3)]],
+		categoria: ['Audio', Validators.required],
+		msrp: [null, [Validators.required, Validators.min(0)]],
+		promocion: [false],
+		imageUrl: ['']
+	});
 
-  productForm: FormGroup = this.fb.group({
-    nombre: ['', [Validators.required, Validators.minLength(3)]],
-    categoria: ['Audio', Validators.required],
-    precio: [null, [Validators.required, Validators.min(0.01)]],
-    stock: [45], 
-    valoracion: [4.9], 
-    oferta: [false],
-    imagen: ['', Validators.required]
-  });
+	ngOnChanges(changes: SimpleChanges): void {
+		if (changes['isOpen']) {
+			this.isModalOpen.set(!!changes['isOpen'].currentValue);
+		}
+	}
 
+	openModal() {
+		this.isModalOpen.set(true);
+		this.isOpenChange.emit(true);
+	}
 
-  constructor() {
-    effect(() => {
-      const imageControl = this.productForm.get('imagen');
-      if (this.imagePreview() !== null) {
-        imageControl?.disable();
-      } else {
-        imageControl?.enable();
-      }
-    });
-  }
+	closeModal() {
+		this.isModalOpen.set(false);
+		this.isOpenChange.emit(false);
+		this.onClose.emit();
+	}
 
+	togglePromo() {
+		const current = this.inventoryForm.get('promocion')?.value;
+		this.inventoryForm.get('promocion')?.setValue(!current);
+	}
 
-  openModal() {
-    this.isOpen.set(true);
-  }
+	resetForm() {
+		this.inventoryForm.reset({ categoria: 'Audio', promocion: false });
+		this.imagePreview.set(null);
+	}
 
+	onSubmit() {
+		if (this.inventoryForm.valid) {
+			const result = {
+				...this.inventoryForm.value,
+				localImage: this.imagePreview(),
+				timestamp: new Date().toISOString(),
+				currency: 'EUR'
+			};
+			console.log('Registro completado (España):', result);
+			this.onRegister.emit(result);
+			this.closeModal();
+			this.resetForm();
+		}
+	}
 
-  closeModal() {
-    if (this.isSubmitting()) return;
-    this.isOpen.set(false);
-    this.showSuccess.set(false);
-  }
+	onFileSelected(event: any) {
+		const file = event.target.files?.[0];
+		this.handleFile(file);
+	}
 
+	onDragOver(event: DragEvent) {
+		event.preventDefault();
+		this.isDragging.set(true);
+	}
 
-  resetForm() {
-    this.productForm.reset({
-      categoria: 'Audio',
-      oferta: false,
-      stock: 45,
-      valoracion: 4.9
-    });
-    this.imagePreview.set(null);
+	onDragLeave(event: DragEvent) {
+		event.preventDefault();
+		this.isDragging.set(false);
+	}
 
-    // Limpiar también el input file
-    if (this.fileInput) {
-      this.fileInput.nativeElement.value = '';
-    }
-  }
+	onDrop(event: DragEvent) {
+		event.preventDefault();
+		this.isDragging.set(false);
+		const file = event.dataTransfer?.files?.[0];
+		this.handleFile(file);
+	}
 
+	private handleFile(file: File | undefined) {
+		if (!file) return;
 
-  onFileSelected(event: Event) {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files[0]) {
-      const file = input.files[0];
+		const allowedTypes = ['image/png', 'image/jpeg', 'image/webp'];
+		if (!allowedTypes.includes(file.type)) return;
 
-      // Validar tipo de archivo
-      if (!file.type.startsWith('image/')) {
-        alert('Por favor selecciona un archivo de imagen válido');
-        return;
-      }
+		const maxSize = 2 * 1024 * 1024;
+		if (file.size > maxSize) return;
 
-      // Validar tamaño (max 2MB)
-      if (file.size > 2 * 1024 * 1024) {
-        alert('La imagen debe ser menor a 2MB');
-        return;
-      }
+		const reader = new FileReader();
+		reader.onload = () => this.imagePreview.set(reader.result as string);
+		reader.readAsDataURL(file);
+	}
 
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const base64String = e.target?.result as string;
-        this.imagePreview.set(base64String);
-        this.productForm.patchValue({ imagen: base64String });
-      };
-      reader.readAsDataURL(file);
-    }
-  }
-
-
-  clearImage() {
-    this.imagePreview.set(null);
-    this.productForm.patchValue({ imagen: '' });
-
-    // Limpiar el input file
-    if (this.fileInput) {
-      this.fileInput.nativeElement.value = '';
-    }
-  }
-
-
-  toggleOferta() {
-    const current = !!this.productForm.get('oferta')?.value;
-    this.productForm.patchValue({ oferta: !current });
-  }
-
-
-  openFileDialog(event?: Event) {
-    // Prevenir propagación del evento para que no cierre el modal
-    if (event) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-
-    // Usar ViewChild para acceder al input file de forma segura
-    if (this.fileInput) {
-      this.fileInput.nativeElement.click();
-    } else {
-      console.error('fileInput ViewChild no está disponible');
-    }
-  }
-
-
-  onSubmit() {
-    if (this.productForm.invalid) {
-      this.productForm.markAllAsTouched(); // Marcar todos los campos como tocados para mostrar errores
-      return;
-    }
-
-
-    this.isSubmitting.set(true);
-    console.log('Formulario de producto enviado:', this.productForm.value);
-
-
-    // Aquí iría la lógica para enviar los datos al backend (p.ej. a través de un servicio)
-    // productsService.create(this.productForm.value).subscribe(...)
-
-
-    // Simulación de llamada a API con un timeout
-    setTimeout(() => {
-      this.isSubmitting.set(false);
-      this.showSuccess.set(true);
-
-      // Opcional: Resetear el formulario después de un éxito
-      // this.resetForm(); 
-
-
-      // Opcional: Cerrar el modal después de un tiempo
-      setTimeout(() => this.closeModal(), 2000); 
-    }, 1500);
-  }
-
-
-  testClickModal() {
-    console.log('ModalCreateProduct test button clicked!');
-  }
+	removeImage() {
+		this.imagePreview.set(null);
+	}
 }
+
