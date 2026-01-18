@@ -1,6 +1,8 @@
-<div class=" flex flex-row ">
 
-    @for (item of lista_productos(); track item.id) {
+<div class=" flex justify-center">
+<div class=" grid grid-cols-1 sm:grid-cols-2  xl:grid-cols-3 2xl:grid-cols-4 gap-10 w-fit justify-center ">
+
+    @for (item of productsService.products_list(); track item.id) {
 
      <app-product-card
      [product]="item"
@@ -8,5 +10,7 @@
 
 
     }
+
+</div>
 
 </div>

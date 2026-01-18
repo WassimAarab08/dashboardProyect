@@ -1,9 +1,10 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { CurrencyPipe } from '@angular/common';
 import Producto from '../../../../core/services/products.service';
 
 @Component({
   selector: 'app-product-card',
-  imports: [],
+  imports: [CurrencyPipe],
   templateUrl: './product-card.html',
 })
 export class ProductCard {

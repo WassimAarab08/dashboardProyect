@@ -10,15 +10,19 @@ import { ProductCard } from '../../components/product-card/product-card';
 })
 export default class ServiciosPageComponent implements OnInit {
   private readonly titleService = inject(PageHeaderService);
-  private readonly productsService: ProductoService = inject(ProductoService);
+  readonly productsService: ProductoService = inject(ProductoService);
   
-  lista_productos=signal(this.productsService.products_list())
-
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.titleService.setPageInfo(
       'Servicios',
       'Clases tipo Singleton diseñadas para compartir lógica de negocio, datos y métodos entre distintos componentes de forma centralizada.'
     );
-    this.productsService.getData()
+    await this.productsService.getData();
+    console.table(this.productsService.products_list());
   }
+  
+
+
+
+
 }

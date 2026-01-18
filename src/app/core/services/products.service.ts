@@ -39,8 +39,8 @@ export class ProductoService {
       }));
  
     this.products_list.set(lista_temp);
-       console.table(this.products_list())
-       
+    
+
   }
 
 
