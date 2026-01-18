@@ -1,5 +1,4 @@
 import { Injectable, signal } from '@angular/core';
-import { Action } from 'rxjs/internal/scheduler/Action';
 
 export default interface Producto {
   id: string;
@@ -9,7 +8,7 @@ export default interface Producto {
   stock: number;
   valoracion: number;
   oferta: boolean;
-  imagen:string;
+  imagen?: string; // <-- AHORA ESTA PROPIEDAD DEBE CONTENER EL ID DEL ARCHIVO DE GOOGLE DRIVE
   imagen_base64?: string;
 }
 
@@ -28,62 +27,69 @@ export class ProductoService {
       .filter((prod) => prod !== null)
       .map((prod) => ({
         ...prod,
-        // id: prod.id,
-        // nombre: prod.nombre,
-        // categoria: prod.categoria,
-        // precio: prod.precio,
-        // stock: prod.stock,
-        // valoracion: prod.valoracion,
-        // oferta: Boolean(prod.oferta),
-        // imagen:prod.imagen
       }));
- 
-    this.products_list.set(lista_temp);
-    
 
+    this.products_list.set(lista_temp);
+  }
+
+  // --- NUEVO MÉTODO PARA OBTENER LA IMAGEN COMO BASE64 ---
+  async getImageAsBase64(fileId: string): Promise<string | null> {
+    if (!fileId) {
+      console.warn('No se proporcionó fileId para la imagen.');
+      return null;
+    }
+    
+    const imageUrl = `${this.BASE_URL}?action=getImage&id=${fileId}`;
+    
+    try {
+      const res = await fetch(imageUrl);
+      const data = await res.json();
+
+      if (data.success) {
+        return data.base64Data;
+      }
+      
+      console.error('Error al obtener la imagen desde Apps Script:', data.error);
+      return null;
+    } catch (error) {
+      console.error('Error de red al obtener la imagen:', error);
+      return null;
+    }
   }
 
 
   async createProduct(nuevoProd: Producto) {
-
     const body = {
       action: 'create',
       payload: nuevoProd
     };
-
      return this.postData(body);
   }
 
-
-async deleteProduct(id:number){
+  async deleteProduct(id:number){
     const body= {
      action:'delete',
      id:id
     }
-
     return this.postData(body)
-}
+  }
 
-async updateProduct(prod:Producto){
+  async updateProduct(prod:Producto){
     const body = {
         action:'update',
         payload:prod
     }
       return this.postData(body)
-}
+  }
 
-
-private async postData(body:any){
-
-
+  private async postData(body:any){
     await fetch(this.BASE_URL,{
         method:'POST',
         mode:'no-cors',
         headers: { 'Content-Type': 'application/json' },
         body:JSON.stringify(body)
     })
-
     await this.getData()
     return true;
-}
+  }
 }

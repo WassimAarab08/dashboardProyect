@@ -21,10 +21,9 @@
     }
     
     <img 
-      [src]="product().imagen" 
+      [src]="imageSrc() | safeUrl" 
       [alt]="product().nombre"
       class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 group-hover:rotate-1"
-      (error)="handleImageError($event)"
     />
     
     <!-- Gradiente de integración visual mejorado -->
@@ -73,16 +72,14 @@
 
       <!-- Botón de Acción -->
       <button 
+
+         (click)="delete(product().id)"
         [disabled]="product().stock === 0"
-        class="w-full sm:w-auto bg-gradient-to-r from-white to-emerald-50 hover:from-emerald-500 hover:to-emerald-600 text-black hover:text-white px-4 sm:px-5 md:px-6 py-2.5 sm:py-3 rounded-xl sm:rounded-2xl transition-all duration-300 active:scale-95 shadow-lg hover:shadow-emerald-500/30 flex items-center justify-center gap-2 group/btn font-bold disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:from-white disabled:hover:to-emerald-50 disabled:hover:text-black disabled:hover:shadow-lg">
+        class="w-full sm:w-auto bg-red-600/50  text-white px-4 sm:px-5 md:px-6 py-2.5 sm:py-3 rounded-xl sm:rounded-2xl transition-all duration-300 active:scale-95 shadow-lg hover:shadow-red-500/30 flex items-center justify-center gap-2 group/btn font-bold disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:from-white disabled:hover:to-emerald-50 disabled:hover:text-black disabled:hover:shadow-lg">
         <span class="text-[10px] sm:text-[11px] font-black uppercase tracking-wider">
-          {{ product().stock > 0 ? 'Comprar' : 'Sin Stock' }}
+          Eliminar
         </span>
-        @if (product().stock > 0) {
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 sm:h-4 sm:w-4 transition-transform group-hover/btn:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-          </svg>
-        }
+     
       </button>
     </div>
   </div>
