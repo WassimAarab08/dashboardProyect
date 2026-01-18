@@ -27,7 +27,7 @@ export class ModalCreateProduct implements OnChanges {
 		modelo: ['', [Validators.required, Validators.minLength(3)]],
 		categoria: ['Audio', Validators.required],
 		msrp: [null, [Validators.required, Validators.min(0)]],
-		promocion: [false],
+		descuento: [0, [Validators.required, Validators.min(0), Validators.max(100)]],
 		imageUrl: ['']
 	});
 
@@ -48,13 +48,8 @@ export class ModalCreateProduct implements OnChanges {
 		this.onClose.emit();
 	}
 
-	togglePromo() {
-		const current = this.inventoryForm.get('promocion')?.value;
-		this.inventoryForm.get('promocion')?.setValue(!current);
-	}
-
 	resetForm() {
-		this.inventoryForm.reset({ categoria: 'Audio', promocion: false });
+		this.inventoryForm.reset({ categoria: 'Audio', descuento: 0 });
 		this.imagePreview.set(null);
 	}
 
