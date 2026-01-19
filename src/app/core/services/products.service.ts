@@ -28,34 +28,11 @@ export class ProductoService {
       .map((prod) => ({
         ...prod,
       }));
-
+   console.table(lista_temp)
     this.products_list.set(lista_temp);
   }
 
-  // --- NUEVO MÉTODO PARA OBTENER LA IMAGEN COMO BASE64 ---
-  async getImageAsBase64(fileId: string): Promise<string | null> {
-    if (!fileId) {
-      console.warn('No se proporcionó fileId para la imagen.');
-      return null;
-    }
-    
-    const imageUrl = `${this.BASE_URL}?action=getImage&id=${fileId}`;
-    
-    try {
-      const res = await fetch(imageUrl);
-      const data = await res.json();
 
-      if (data.success) {
-        return data.base64Data;
-      }
-      
-      console.error('Error al obtener la imagen desde Apps Script:', data.error);
-      return null;
-    } catch (error) {
-      console.error('Error de red al obtener la imagen:', error);
-      return null;
-    }
-  }
 
 
   async createProduct(nuevoProd: Producto) {
