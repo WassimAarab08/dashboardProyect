@@ -1,6 +1,6 @@
 import { Component, signal, model, output, ChangeDetectionStrategy, inject } from '@angular/core';
 import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import Producto, { ProductoService } from '../../../../core/services/products.service';
+import { Producto, ProductoService } from '../../../../core/services/products.service';
 
 export interface ProductRegistration {
 	modelo: string;
@@ -77,8 +77,7 @@ export class ModalCreateProduct {
       imagen_base64: this.imagePreview() ?? undefined,
 		};
 
-    console.log(result)
-    console.log(this.imagePreview())
+   
 	  this.productService.createProduct(result);
 		this.closeModal();
 		this.resetForm();

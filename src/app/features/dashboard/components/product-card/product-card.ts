@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, input, signal, OnInit, inject, SimpleChanges, OnChanges } from '@angular/core';
+import { Component, input, signal, inject } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
-import Producto, { ProductoService } from '../../../../core/services/products.service';
+import { Producto, ProductoService } from '../../../../core/services/products.service';
 
 
 @Component({

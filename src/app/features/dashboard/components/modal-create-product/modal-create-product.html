@@ -17,198 +17,154 @@
 	}
 </style>
 
-<!-- Fondo de página más oscuro -->
-<div class="min-h-screen bg-[#090a0f] flex items-center justify-center p-4 font-sans text-slate-300">
-  
-	<!-- Botón de Activación -->
-	@if (!isOpen()) {
-		<button 
-			(click)="openModal()"
-			class="bg-[#4a90e2] hover:bg-[#357abd] text-white font-bold py-3 px-8 rounded-xl transition-all transform hover:scale-105 shadow-lg flex items-center gap-2">
-			<svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-				<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-			</svg>
-			ABRIR REGISTRO DE PRODUCTO
-		</button>
-	}
+<!-- Modal Overlay: This is the root of the component now -->
+@if (isOpen()) {
+<div
+  class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-300">
 
-	<!-- Modal Overlay -->
-	@if (isOpen()) {
-		<div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-300">
-      
-			<!-- Contenedor del Modal (Tono más oscuro) -->
-			<div class="relative w-full max-w-2xl bg-[#0d101b] rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden border border-slate-800/60 animate-in zoom-in-95 duration-300">
-        
-				<!-- Botón Cerrar (X) -->
-				<button 
-					(click)="closeModal()"
-					class="absolute top-5 right-5 text-slate-500 hover:text-white transition-colors p-2 hover:bg-white/5 rounded-full">
-					<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-					</svg>
-				</button>
+  <!-- Contenedor del Modal (Tono más oscuro) -->
+  <div
+    class="relative w-full max-w-2xl bg-[#0d101b] rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden border border-slate-800/60 animate-in zoom-in-95 duration-300">
 
-				<!-- Cabecera -->
-				<div class="p-8 pb-4">
-					<h1 class="text-2xl font-bold tracking-tight text-white">NUEVO REGISTRO</h1>
-					<p class="text-[#00ff88] text-xs font-bold tracking-[0.2em] mt-1">GESTIÓN DE INVENTARIO • ESPAÑA</p>
-				</div>
+    <!-- Botón Cerrar (X) -->
+    <button (click)="closeModal()"
+      class="absolute top-5 right-5 text-slate-500 hover:text-white transition-colors p-2 hover:bg-white/5 rounded-full">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
 
-				<!-- Formulario -->
-				<form [formGroup]="inventoryForm" (ngSubmit)="onSubmit()" class="p-8 pt-0 space-y-6">
-          
-					<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            
-							<!-- Modelo / Designación -->
-							<div class="flex flex-col gap-2">
-								<label class="text-xs font-semibold text-slate-500">MODELO / DESIGNACIÓN</label>
-								<input 
-									type="text" 
-									formControlName="modelo"
-									placeholder="Ej. Auriculares Studio Pro"
-									class="bg-[#070912] border border-slate-800 rounded-xl px-4 py-3 text-slate-200 focus:outline-none focus:ring-2 focus:ring-[#4a90e2]/50 focus:border-[#4a90e2] transition-all placeholder:text-slate-700">
-								@if (inventoryForm.get('modelo')?.touched && inventoryForm.get('modelo')?.invalid) {
-									<span class="text-red-400 text-[10px] uppercase font-bold">Campo obligatorio</span>
-								}
-							</div>
+    <!-- Cabecera -->
+    <div class="p-8 pb-4">
+      <h1 class="text-2xl font-bold tracking-tight text-white">NUEVO REGISTRO</h1>
+      <p class="text-[#00ff88] text-xs font-bold tracking-[0.2em] mt-1">GESTIÓN DE INVENTARIO • ESPAÑA</p>
+    </div>
 
-							<!-- Categoría -->
-							<div class="flex flex-col gap-2">
-								<label class="text-xs font-semibold text-slate-500">CATEGORÍA</label>
-								<select 
-									formControlName="categoria"
-									class="bg-[#070912] border border-slate-800 rounded-xl px-4 py-3 text-slate-200 focus:outline-none focus:ring-2 focus:ring-[#4a90e2]/50 focus:border-[#4a90e2] transition-all appearance-none cursor-pointer">
-									@for (cat of categorias; track cat) {
-										<option [value]="cat">{{cat}}</option>
-									}
-								</select>
-							</div>
+    <!-- Formulario -->
+    <form [formGroup]="inventoryForm" (ngSubmit)="onSubmit()" class="p-8 pt-0 space-y-6">
 
-							<!-- MSRP (€) -->
-							<div class="flex flex-col gap-2">
-								<label class="text-xs font-semibold text-slate-500">MSRP (€)</label>
-								<div class="relative">
-									<input 
-										type="number" 
-										formControlName="msrp"
-										placeholder="0,00"
-										class="w-full bg-[#070912] border border-slate-800 rounded-xl pl-4 pr-10 py-3 text-slate-200 focus:outline-none focus:ring-2 focus:ring-[#4a90e2]/50 focus:border-[#4a90e2] transition-all placeholder:text-slate-700">
-									<span class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 font-bold">€</span>
-								</div>
-							</div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-							<div class="grid grid-cols-2 gap-4">
-								<div class="flex flex-col gap-2">
-									<label class="text-xs font-semibold text-slate-500">DESCUENTO (%)</label>
-									<input
-										type="number"
-										formControlName="descuento"
-										min="0"
-										max="100"
-										step="1"
-										placeholder="25"
-										class="w-full bg-[#070912] border border-slate-800 rounded-xl px-3 py-2 text-slate-200 focus:outline-none focus:ring-2 focus:ring-[#4a90e2]/50 focus:border-[#4a90e2] transition-all">
-									@if (inventoryForm.get('descuento')?.touched && inventoryForm.get('descuento')?.invalid) {
-										<span class="text-red-400 text-[10px] uppercase font-bold">Valor entre 0 y 100</span>
-									}
-								</div>
-								<div class="flex flex-col gap-2">
-									<label class="text-xs font-semibold text-slate-500">STOCK</label>
-									<input
-										type="number"
-										formControlName="stock"
-										min="0"
-										placeholder="0"
-										step="1"
-										class="w-full bg-[#070912] border border-slate-800 rounded-xl px-3 py-2 text-slate-200 focus:outline-none focus:ring-2 focus:ring-[#4a90e2]/50 focus:border-[#4a90e2] transition-all">
-								</div>
-							</div>
-					</div>
+        <!-- Modelo / Designación -->
+        <div class="flex flex-col gap-2">
+          <label class="text-xs font-semibold text-slate-500">MODELO / DESIGNACIÓN</label>
+          <input type="text" formControlName="modelo" placeholder="Ej. Auriculares Studio Pro"
+            class="bg-[#070912] border border-slate-800 rounded-xl px-4 py-3 text-slate-200 focus:outline-none focus:ring-2 focus:ring-[#4a90e2]/50 focus:border-[#4a90e2] transition-all placeholder:text-slate-700">
+          @if (inventoryForm.get('modelo')?.touched && inventoryForm.get('modelo')?.invalid) {
+          <span class="text-red-400 text-[10px] uppercase font-bold">Campo obligatorio</span>
+          }
+        </div>
 
-					<!-- Upload de Imagen -->
-					<div class="flex flex-col gap-2">
-						<label class="text-xs font-semibold text-slate-500">IMAGEN DEL PRODUCTO</label>
-            
-						<div 
-							(dragover)="onDragOver($event)"
-							(dragleave)="onDragLeave($event)"
-							(drop)="onDrop($event)"
-							[class.border-[#00ff88]]="isDragging()"
-							[class.bg-[#0a0d16]]="isDragging()"
-							class="relative group cursor-pointer border-2 border-dashed border-slate-800 rounded-2xl p-6 bg-[#070912] transition-all hover:border-[#4a90e2] hover:bg-[#0a0d16]">
-              
-							<input 
-								type="file" 
-								#fileInput
-								(change)="onFileSelected($event)"
-								accept=".png,.jpg,.webp"
-								class="hidden">
+        <!-- Categoría -->
+        <div class="flex flex-col gap-2">
+          <label class="text-xs font-semibold text-slate-500">CATEGORÍA</label>
+          <select formControlName="categoria"
+            class="bg-[#070912] border border-slate-800 rounded-xl px-4 py-3 text-slate-200 focus:outline-none focus:ring-2 focus:ring-[#4a90e2]/50 focus:border-[#4a90e2] transition-all appearance-none cursor-pointer">
+            @for (cat of categorias; track cat) {
+            <option [value]="cat">{{cat}}</option>
+            }
+          </select>
+        </div>
 
-							<div class="flex flex-col items-center justify-center gap-2" (click)="fileInput.click()">
-								@if (imagePreview()) {
-									<div class="relative w-28 h-28 rounded-xl overflow-hidden border border-slate-700 shadow-xl mb-1">
-										<img [src]="imagePreview()" class="w-full h-full object-cover">
-										<button 
-											type="button"
-											(click)="$event.stopPropagation(); removeImage()"
-											class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
-											<svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
-										</button>
-									</div>
-								} @else {
-									<div class="p-3 bg-slate-800/30 rounded-full mb-1 group-hover:bg-[#4a90e2]/10 transition-colors">
-										<svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-slate-600 group-hover:text-[#4a90e2] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-										</svg>
-									</div>
-									<p class="text-sm font-semibold text-slate-500 group-hover:text-slate-300 transition-colors">Seleccionar imagen</p>
-									<p class="text-[9px] text-slate-700 uppercase tracking-[0.1em]">Formatos webp/png/jpg • Máx. 2MB</p>
-								}
-							</div>
-						</div>
+        <!-- MSRP (€) -->
+        <div class="flex flex-col gap-2">
+          <label class="text-xs font-semibold text-slate-500">MSRP (€)</label>
+          <div class="relative">
+            <input type="number" formControlName="msrp" placeholder="0,00"
+              class="w-full bg-[#070912] border border-slate-800 rounded-xl pl-4 pr-10 py-3 text-slate-200 focus:outline-none focus:ring-2 focus:ring-[#4a90e2]/50 focus:border-[#4a90e2] transition-all placeholder:text-slate-700">
+            <span class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 font-bold">€</span>
+          </div>
+        </div>
 
-						<!-- URL Alternativa -->
-						<div class="mt-4">
-							<div class="flex items-center gap-2 mb-2 px-1">
-								<div class="h-[1px] flex-1 bg-slate-800"></div>
-								<span class="text-[9px] text-slate-600 font-black tracking-widest uppercase">O URL Remota</span>
-								<div class="h-[1px] flex-1 bg-slate-800"></div>
-							</div>
-							<input 
-								type="url" 
-								formControlName="imageUrl"
-								placeholder="https://servidor.es/imagen.jpg"
-								class="w-full bg-[#070912] border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-slate-300 focus:outline-none focus:ring-1 focus:ring-[#4a90e2]/50 placeholder:text-slate-700">
-						</div>
-					</div>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="flex flex-col gap-2">
+            <label class="text-xs font-semibold text-slate-500">DESCUENTO (%)</label>
+            <input type="number" formControlName="descuento" min="0" max="100" step="1" placeholder="25"
+              class="w-full bg-[#070912] border border-slate-800 rounded-xl px-3 py-2 text-slate-200 focus:outline-none focus:ring-2 focus:ring-[#4a90e2]/50 focus:border-[#4a90e2] transition-all">
+            @if (inventoryForm.get('descuento')?.touched && inventoryForm.get('descuento')?.invalid) {
+            <span class="text-red-400 text-[10px] uppercase font-bold">Valor entre 0 y 100</span>
+            }
+          </div>
+          <div class="flex flex-col gap-2">
+            <label class="text-xs font-semibold text-slate-500">STOCK</label>
+            <input type="number" formControlName="stock" min="0" placeholder="0" step="1"
+              class="w-full bg-[#070912] border border-slate-800 rounded-xl px-3 py-2 text-slate-200 focus:outline-none focus:ring-2 focus:ring-[#4a90e2]/50 focus:border-[#4a90e2] transition-all">
+          </div>
+        </div>
+      </div>
 
-					<!-- Botones Inferiores -->
-					<div class="flex items-center gap-4 pt-4">
-						<button 
-							type="button"
-							(click)="resetForm()"
-							class="flex items-center gap-2 px-6 py-3 rounded-xl border border-slate-800 text-slate-500 hover:text-red-400 hover:border-red-400/30 hover:bg-red-400/5 transition-all font-bold text-xs tracking-wider">
-							<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-							</svg>
-							LIMPIAR
-						</button>
+      <!-- Upload de Imagen -->
+      <div class="flex flex-col gap-2">
+        <label class="text-xs font-semibold text-slate-500">IMAGEN DEL PRODUCTO</label>
 
-						<button 
-							type="submit"
-							[disabled]="inventoryForm.invalid"
-							class="flex-1 flex items-center justify-center gap-3 bg-emerald-700/70 hover:bg-emerald-700 disabled:bg-slate-800/50 disabled:text-slate-700 disabled:cursor-not-allowed text-white font-black py-3.5 rounded-xl transition-all shadow-amber-100 hover:shadow-amber-50 text-sm tracking-wide">
-							REGISTRAR PRODUCTO
-							<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-							</svg>
-						</button>
-					</div>
+        <div (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)" (drop)="onDrop($event)"
+          [class.border-[#00ff88]]="isDragging()" [class.bg-[#0a0d16]]="isDragging()"
+          class="relative group cursor-pointer border-2 border-dashed border-slate-800 rounded-2xl p-6 bg-[#070912] transition-all hover:border-[#4a90e2] hover:bg-[#0a0d16]">
 
-				</form>
-			</div>
-		</div>
-	}
+          <input type="file" #fileInput (change)="onFileSelected($event)" accept=".png,.jpg,.webp" class="hidden">
 
+          <div class="flex flex-col items-center justify-center gap-2" (click)="fileInput.click()">
+            @if (imagePreview()) {
+            <div class="relative w-28 h-28 rounded-xl overflow-hidden border border-slate-700 shadow-xl mb-1">
+              <img [src]="imagePreview()" class="w-full h-full object-cover">
+              <button type="button" (click)="$event.stopPropagation(); removeImage()"
+                class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-red-400" fill="none" viewBox="0 0 24 24"
+                  stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                </svg>
+              </button>
+            </div>
+            } @else {
+            <div class="p-3 bg-slate-800/30 rounded-full mb-1 group-hover:bg-[#4a90e2]/10 transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg"
+                class="w-8 h-8 text-slate-600 group-hover:text-[#4a90e2] transition-colors" fill="none"
+                viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+              </svg>
+            </div>
+            <p class="text-sm font-semibold text-slate-500 group-hover:text-slate-300 transition-colors">Seleccionar
+              imagen</p>
+            <p class="text-[9px] text-slate-700 uppercase tracking-[0.1em]">Formatos webp/png/jpg • Máx. 2MB</p>
+            }
+          </div>
+        </div>
+
+        <!-- URL Alternativa -->
+        <div class="mt-4">
+          <div class="flex items-center gap-2 mb-2 px-1">
+            <div class="h-[1px] flex-1 bg-slate-800"></div>
+            <span class="text-[9px] text-slate-600 font-black tracking-widest uppercase">O URL Remota</span>
+            <div class="h-[1px] flex-1 bg-slate-800"></div>
+          </div>
+          <input type="url" formControlName="imageUrl" placeholder="https://servidor.es/imagen.jpg"
+            class="w-full bg-[#070912] border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-slate-300 focus:outline-none focus:ring-1 focus:ring-[#4a90e2]/50 placeholder:text-slate-700">
+        </div>
+      </div>
+
+      <!-- Botones Inferiores -->
+      <div class="flex items-center gap-4 pt-4">
+        <button type="button" (click)="resetForm()"
+          class="flex items-center gap-2 px-6 py-3 rounded-xl border border-slate-800 text-slate-500 hover:text-red-400 hover:border-red-400/30 hover:bg-red-400/5 transition-all font-bold text-xs tracking-wider">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+          </svg>
+          LIMPIAR
+        </button>
+
+        <button type="submit" [disabled]="inventoryForm.invalid"
+          class="flex-1 flex items-center justify-center gap-3 bg-emerald-700/70 hover:bg-emerald-700 disabled:bg-slate-800/50 disabled:text-slate-700 disabled:cursor-not-allowed text-white font-black py-3.5 rounded-xl transition-all shadow-amber-100 hover:shadow-amber-50 text-sm tracking-wide">
+          REGISTRAR PRODUCTO
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </button>
+      </div>
+
+    </form>
+  </div>
 </div>
-
+}

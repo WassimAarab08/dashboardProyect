@@ -27,8 +27,8 @@
       </div>
     }
 
-    <img 
-      [src]="product().imagen"
+    <img
+      [src]="product().imagen || product().imagen_base64"
       [alt]="product().nombre"
       class="w-full h-full object-cover transition-all duration-700 group-hover:scale-100 group-hover:rotate-1"
     />
