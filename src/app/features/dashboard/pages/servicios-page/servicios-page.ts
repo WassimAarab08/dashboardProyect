@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, inject, model, OnInit, signal } from '@angular/core';
 import { PageHeaderService } from '../../services/page-header.service';
 import { ProductoService } from '../../../../core/services/products.service';
