@@ -38,6 +38,8 @@ export class ProductoService {
       await firstValueFrom(this.http.post(this.BASE_URL, { action: 'create', payload: nuevoProd }));
     } catch (error) {
       this.productsResource.value.set(previousData);
+    } finally {
+      this.productsResource.reload();
     }
   }
 
